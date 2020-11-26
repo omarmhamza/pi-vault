@@ -10390,7 +10390,11 @@ Custom for pi-vault
  ============================================================== */
 
 
- .password-action {
+.password-action {
   font-size: 1.2em; 
   letter-spacing: 5px;
  }
+
+.hidePassword {
+  -webkit-text-security: circle; /* Default */
+}
