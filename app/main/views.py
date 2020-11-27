@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import render_template, session, redirect, url_for, request, flash
 from forms import AddPasswordField
 from Password import Password
@@ -5,7 +7,7 @@ from collections import deque
 from . import main
 from .. import mongo
 from methods import getIcons
-
+from .. import hashids
 
 account_number = "12345"  # test field
 
@@ -58,6 +60,28 @@ def addPassword():
 @main.route("/passwords/edit/<id>", methods=["GET", "POST"])
 def edit(id):
     form = AddPasswordField()
+    if form.is_submitted() and form.validate_on_submit():
+        website = form.website.data
+        icon = str(request.form.getlist('cat').pop().decode('utf-8')).strip("&#x")
+        username = form.email.data
+        encrypted = Password.encrypt(form.password.data)
+        pass_index = hashids.decrypt(id)[0] - 1
+        now = datetime.now()
+        date = now.strftime("%d/%m/%Y, %H:%M:%S")
+        updated_values =  {
+            "passwords.{}.website".format(pass_index): website,
+            "passwords.{}.icon_unicode".format(pass_index): icon,
+            "passwords.{}.username".format(pass_index): username,
+            "passwords.{}.encrypted".format(pass_index): encrypted,
+            "passwords.{}.modified".format(pass_index): date,
+        }
+
+        mongo.db.users.update_one(
+            {"_id": account_number},
+            {'$set': updated_values}
+        )
+        flash("Successfully edited password","info")
+        return redirect("/")
     account = mongo.db.users.find_one_or_404({"_id": account_number})
     passwords = account["passwords"]
     for password in passwords:

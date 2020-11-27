@@ -9,12 +9,13 @@ class Password:
         self.website = website
         self.username = username
         now = datetime.now()
-        self.created = now.strftime("%d/%m/%Y, %H:%M:%S")
-        self.modified = ""
+        date = now.strftime("%d/%m/%Y, %H:%M:%S")
+        self.created = date
+
         if icon:
             self.icon_unicode = icon
         else:
-            self.icon_unicode = "0"
+            self.icon_unicode = "f084" #key icon font awesome
 
     @staticmethod
     def encrypt(raw):
