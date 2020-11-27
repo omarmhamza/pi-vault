@@ -10394,7 +10394,3 @@ Custom for pi-vault
   font-size: 1.2em; 
   letter-spacing: 5px;
  }
-
-.hidePassword {
-  -webkit-text-security: circle; /* Default */
-}

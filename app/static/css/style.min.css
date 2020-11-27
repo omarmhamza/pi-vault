@@ -2679,7 +2679,7 @@ textarea.form-control.is-valid {
 .was-validated .custom-select:valid {
     border-color: #7ace4c;
     padding-right: calc(0.75em + 2.3125rem);
-    background: url(../../assets/images/custom-select.png) no-repeat right 0.75rem center/8px 10px,
+    background: url(/assets/images/custom-select.png) no-repeat right 0.75rem center/8px 10px,
         url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%237ace4c' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e")
             #fff no-repeat center right 1.75rem / calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
@@ -2783,7 +2783,7 @@ textarea.form-control.is-invalid {
 .was-validated .custom-select:invalid {
     border-color: #f33155;
     padding-right: calc(0.75em + 2.3125rem);
-    background: url(../../assets/images/custom-select.png) no-repeat right 0.75rem center/8px 10px,
+    background: url(/assets/images/custom-select.png) no-repeat right 0.75rem center/8px 10px,
         url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23f33155' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23f33155' stroke='none'/%3e%3c/svg%3e")
             #fff no-repeat center right 1.75rem / calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
@@ -4610,7 +4610,7 @@ input[type="submit"].btn-block {
     line-height: 1.5;
     color: #525f7f;
     vertical-align: middle;
-    background: #fff url(../../assets/images/custom-select.png) no-repeat right 0.75rem center/8px 10px;
+    background: #fff url(/assets/images/custom-select.png) no-repeat right 0.75rem center/8px 10px;
     border: 1px solid #e9ecef;
     border-radius: 2px;
     -webkit-box-shadow: none;
@@ -13639,6 +13639,7 @@ html body .waves-notransition {
         -ms-flex-pack: end;
         justify-content: flex-end;
     }
+
     
 }
 @media (max-width: 991.98px) {
@@ -13651,6 +13652,10 @@ html body .waves-notransition {
     table{
         font-size:15px;
     }
+    .add-password-button{
+    margin-top: 10px;
+}
+
 }
 
 .password-action {
@@ -13659,12 +13664,12 @@ html body .waves-notransition {
    }
 
 .table-responsive {
-    max-height:500px;
+    max-height:400px;
 }
 
 .white-box{
-    border-radius: 30px;
-    
+    border-radius: 0px;
+
 }
 
 .password-container{
@@ -13672,10 +13677,21 @@ html body .waves-notransition {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-    font-size: 14px;
-    
+    font-size: 16px;
+
 }
 .log{
     margin: 10px;
     margin-bottom: 25px;
+}
+
+.cat-icon{
+    font-family: 'Font Awesome\ 5 Brands','Font Awesome\ 5 Free';
+    font-size: 20px;
+    font-weight: 900;
+}
+
+
+.table td{
+    /*padding:0 5px 0 0; !* Only right padding*!*/
 }

@@ -42,3 +42,10 @@ for T in tr_elements[2:]:
     if x:
         print(w,x)
         w+=1
+
+mycol.insert_one(
+        {
+            "name":str("Key"),
+            "unicode":str("f084"),
+            "tags":[]
+        })
