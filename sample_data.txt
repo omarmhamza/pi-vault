@@ -1,0 +1,113 @@
+[
+  {
+    "_id": {"$oid": "5fc3a933be95de72fe4c15e3"},
+    "accounts": {
+      "12345": {
+        "total_passwords": 7,
+        "passwords": [
+          {
+            "testid": {
+              "website": "something",
+              "encrypted": "omar",
+              "username": "hello",
+              "icon_unicode": "0"
+            }
+          },
+          {
+            "testid2": {
+              "website": "something2"
+            }
+          },
+          {
+            "mbk5e": {
+              "website": "asdad",
+              "username": "username",
+              "created": "29/11/2020, 17:21:25",
+              "encrypted": "encyasdsa",
+              "icon_unicode": "f084"
+            }
+          },
+          {
+            "mbk5e": {
+              "website": "wwwww",
+              "username": "asdasd",
+              "created": "29/11/2020, 17:22:10",
+              "encrypted": "encyasdas",
+              "icon_unicode": "f084"
+            }
+          },
+          {
+            "mbk5e": {
+              "website": "asdsad",
+              "username": "username",
+              "created": "29/11/2020, 17:27:08",
+              "encrypted": "encyasdsa",
+              "icon_unicode": "f084"
+            }
+          },
+          {
+            "nel5a": {
+              "website": "asdasda",
+              "username": "username",
+              "created": "29/11/2020, 17:27:33",
+              "encrypted": "encyasdasdad",
+              "icon_unicode": "f084"
+            }
+          },
+          {
+            "vbmOe": {
+              "website": "21hello",
+              "username": "asdasdas",
+              "created": "29/11/2020, 17:34:50",
+              "encrypted": "encyBATATA",
+              "icon_unicode": "f420",
+              "modified": "29/11/2020, 17:55:07"
+            }
+          },
+          {
+            "penRe": {
+              "website": "NEW",
+              "username": "username",
+              "created": "29/11/2020, 17:37:07",
+              "encrypted": "encyasdasd",
+              "icon_unicode": "f270"
+            }
+          },
+          {
+            "xboja": {
+              "website": "HELLO4",
+              "username": "adas",
+              "created": "29/11/2020, 17:38:19",
+              "encrypted": "encyencyencyencyasda",
+              "icon_unicode": "f36d",
+              "modified": "29/11/2020, 18:52:34"
+            }
+          }
+        ]
+      },
+      "accoun2": {
+        "something": "ss",
+        "passwords": [
+          {
+            "www": {
+              "website": "something3333"
+            }
+          },
+          {
+            "qqq": {
+              "website": "asdasda"
+            }
+          }
+        ]
+      }
+    }
+  }
+]
+
+
+    # web_accounts = mongo.db.users.aggregate(
+    #     [{"$project": {
+    #         "_id": 0,
+    #         "passwords": "$accounts.12345.passwords",
+    #     }
+    #     }])

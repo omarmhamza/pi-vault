@@ -12,13 +12,10 @@
 
                     <div class="col password-page">
                         <h2 class="text-center">Add Password to Vault</h2>
-                        <div class="log">
-                            <span class="badge badge-pill badge-primary">Created on 10/10/2019</span>
-                            <span class="badge badge-pill badge-info">Modified on 12/15/2020</span>
-                        </div>
+
                         <div class="form-group">
                             <label for="website">Website</label>
-                            {{form.website(class_="form-control",id="website",placeholder="Website address such as www.pi-hole.com",value="website")}}
+                            {{form.website(class_="form-control",id="website",placeholder="Website address such as www.pi-hole.com")}}
                             <!--                            <input type="text" class="form-control" id="exampleInputEmail1"-->
                             <!--                                   placeholder="Website address such as www.pi-hole.com">-->
                         </div>
@@ -82,8 +79,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-lg btn-block btn-outline-success" type="submit"><i
-                                class="fas fa-lock"></i> Add to Vault
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" data-toggle="tooltip" data-placement="bottom"
+                                       title="Add password to vault" ><i
+                                class="fas fa-lock"></i>
                         </button>
                         <!--                        <button type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal"-->
                         <!--                                data-target="#exampleModal"><i class="fas fa-trash-alt"></i> Delete from Vault-->
@@ -100,4 +98,12 @@
 
         </div>
 
+{%endblock%}
+
+{%block scripts%}
+<script>
+
+    window.onload = getNotifications;
+
+</script>
 {%endblock%}

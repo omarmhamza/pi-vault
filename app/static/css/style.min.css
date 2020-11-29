@@ -13695,3 +13695,8 @@ html body .waves-notransition {
 .table td{
     /*padding:0 5px 0 0; !* Only right padding*!*/
 }
+
+.delete-button{
+    margin: 0px;
+    text-align: right;
+}

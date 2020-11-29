@@ -3,15 +3,14 @@ from datetime import datetime
 
 
 class Password:
-    def __init__(self, website, username,icon,_id,raw):
-        self.id = hashids.encode(_id)
+    def __init__(self, website, username,icon,raw,_id):
         self.encrypted = Password.encrypt(raw)
         self.website = website
         self.username = username
         now = datetime.now()
         date = now.strftime("%d/%m/%Y, %H:%M:%S")
         self.created = date
-
+        self._id = hashids.encode(_id)
         if icon:
             self.icon_unicode = icon
         else:
@@ -26,7 +25,9 @@ class Password:
         return encrypted
 
     def jsonifyResponse(self):
-        response = vars(self)
-        print response
+        dataFrame = vars(self).copy()
+        del dataFrame["_id"]
+        response = {str(self._id):dataFrame}
         return response
+
 
