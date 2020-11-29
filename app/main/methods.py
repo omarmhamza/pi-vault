@@ -10,6 +10,12 @@ def getIcons():
     return icons
 
 
+
+def getIconFromList(value):
+    icon_selected = str(value.pop().decode('utf-8')).strip("&#x")
+    icon = mongo.db.icons.find_one({"unicode": icon_selected})
+    return icon
+
 def getPasswords(account):
     return mongo.db.users.distinct("accounts.{}.passwords".format(account))
 
@@ -35,10 +41,12 @@ def pushPassword(account, password):
 def updatePassword(account, id, password):
     updated_values = {
         "accounts.{}.passwords.$.{}.website".format(account, id): password["website"],
-        "accounts.{}.passwords.$.{}.icon_unicode".format(account, id): password["icon_unicode"],
+        "accounts.{}.passwords.$.{}.icon".format(account, id): password["icon"],
         "accounts.{}.passwords.$.{}.username".format(account, id): password["username"],
         "accounts.{}.passwords.$.{}.encrypted".format(account, id): password["encrypted"],
         "accounts.{}.passwords.$.{}.modified".format(account, id): password["modified"],
+        "accounts.{}.passwords.$.{}.validURL".format(account, id): password["validURL"],
+
     }
     mongo.db.users.update(
         {"accounts.{}.passwords.{}".format(account, id): {"$exists": "true"}},

@@ -60,10 +60,11 @@
 
                             <select class="form-control form-control-lg" name="cat"
                                     style="font-family: 'Font Awesome\ 5 Brands'">
-                                <option value="{{password.icon_unicode }}"> &#x{{ password.icon_unicode | safe }}</option>
-
-                                <option value="f084"> Not assigned</option>
-
+                                {%if password.icon.unicode == "f084"%}
+                                <option value="f084" > Not assigned</option>
+                                {%else%}
+                                <option value="{{password.icon.unicode}}" class="cat-icon"> &#x{{ password.icon.unicode | safe }}</option>
+                                {%endif%}
                                 {% for unicode,name in icons %}
                                 <option value="{{unicode}}">{{name}} {{ unicode | safe }} </option>
                                 {% endfor %}

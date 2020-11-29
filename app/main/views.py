@@ -21,15 +21,8 @@ def index():
     for passwords in web_accounts:
         for id, details in passwords.items():
             try:
-                if details.has_key("icon_unicode"):
-                    icon_meta = mongo.db.icons.find_one({"unicode": details["icon_unicode"]})
-                else:
-                    icon_meta = {"name": ""}
-            except:
-                pass
-            try:
                 password = {"raw": Password.decrypt(details["encrypted"]), "website": details["website"],
-                            "username": details["username"], "icon": details["icon_unicode"], "id": id,
+                            "username": details["username"], "icon": details["icon"], "id": id, "validURL":details["validURL"]
                             }
                 passwords_list.appendleft(password)
             except:
@@ -43,9 +36,10 @@ def addPassword():
     form = AddPasswordField()
     if form.is_submitted():
         if form.validate_on_submit():
+            icon = getIconFromList(request.form.getlist('cat'))
             password = Password(
                 website=form.website.data,
-                icon=str(request.form.getlist('cat').pop().decode('utf-8')).strip("&#x"),
+                icon= icon,
                 username=form.email.data,
                 raw=form.password.data,
                 _id= getPasswordCount(account_number)[0]
@@ -67,9 +61,11 @@ def edit(id):
     if form.is_submitted() and form.validate_on_submit():
         now = datetime.now()
         date = now.strftime("%d/%m/%Y, %H:%M:%S")
+        icon = getIconFromList(request.form.getlist('cat'))
         password = {
-            "icon_unicode":str(request.form.getlist('cat').pop().decode('utf-8')).strip("&#x"),
+            "icon": icon,
             "website": form.website.data,
+            "validURL" : Password.validateURL(form.website.data),
             "username" : form.email.data,
             "encrypted": Password.encrypt(form.password.data),
             "modified": str(date),
