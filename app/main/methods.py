@@ -1,5 +1,5 @@
 from .. import mongo
-
+from Password import Encryption
 
 def getIcons():
     icons = []
@@ -21,14 +21,21 @@ def getPasswords(account):
 
 
 def getPasswordCount(account):
-    return mongo.db.users.distinct("accounts.{}.total_passwords".format(account))
+    return mongo.db.users.distinct("accounts.{}.total_passwords".format(account))[0]
+
+
 
 
 def getPassword(account, id):
-    return mongo.db.users.distinct("accounts.{}.passwords.{}".format(account, id))[0]
+    password = mongo.db.users.distinct("accounts.{}.passwords.{}".format(account, id))[0]
+    password["encrypted"] = Encryption.decrypt(password["encrypted"])
+    password["username"] = Encryption.decrypt(password["username"])
+    password["website"] = Encryption.decrypt(password["website"])
+    return password
 
 
 def pushPassword(account, password):
+
     mongo.db.users.update(
         {"accounts.{}.passwords".format(account): {"$exists": "true"}},
         {
@@ -61,5 +68,8 @@ def deletePassword(account, id):
     )
     mongo.db.users.update(
         {"accounts.{}.passwords".format(account): {"$exists": "true"}},
-        {"$pull": {"accounts.{}.passwords".format(account): None}}
+        {
+            "$inc": {"accounts.{}.total_passwords".format(account): -1},
+            "$pull": {"accounts.{}.passwords".format(account): None}
+        }
     )

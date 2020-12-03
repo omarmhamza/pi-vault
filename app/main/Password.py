@@ -1,44 +1,80 @@
 from .. import hashids
 from datetime import datetime
 import re
+from cryptography.fernet import Fernet
+import shortuuid
+
+def load_key():
+    """
+    Load the eviously generated key
+    """
+    return open("/home/omar/secret.key", "rb").read()
+
+
+class Encryption:
+    @staticmethod
+    def encrypt(raw):
+        key = load_key()
+        encoded_message = raw.encode()
+        f = Fernet(key)
+        encrypted_message = f.encrypt(encoded_message)
+        return str(encrypted_message)
+
+    @staticmethod
+    def decrypt(encrypted):
+        key = load_key()
+        f = Fernet(key)
+        decrypted_message = f.decrypt(bytes(encrypted))
+        return decrypted_message.decode()
 
 
 class Password:
     def __init__(self, website, username, icon, raw, _id):
-        self.encrypted = Password.encrypt(raw)
-        self.website = website
-        self.username = username
+        self.encrypted = Encryption.encrypt(raw)
+        if "http://" in website:
+            self.website = str(website.strip("http://"))
+        elif "https://" in website:
+            self.website = str(website.strip("https://"))
+        else:
+            self.website = str(website)
+        self.website = Encryption.encrypt(self.website)
+        self.username = Encryption.encrypt(username)
         self.validURL = True if self.validateURL(website) else False
         now = datetime.now()
         date = now.strftime("%d/%m/%Y, %H:%M:%S")
         self.created = date
-        self._id = hashids.encode(_id)
+        self._id = shortuuid.uuid()
         if icon:
             self.icon = icon
         else:
             self.icon = {"unicode": "f084"}
 
     @staticmethod
-    def encrypt(raw):
-        return "{}{}".format("ency", raw)
-
-    @staticmethod
-    def decrypt(encrypted):
-        return encrypted
-
-    @staticmethod
     def validateURL(url):
         regex = re.compile(
-            # r'^(?:http|ftp)s?://'  # http:// or https://
-            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
-            r'localhost|'  # localhost...
-            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
-            r'(?::\d+)?'  # optional port
-            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+            '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$',
+            re.IGNORECASE)
         return re.match(regex, str(url)) is not None
+
+    # @staticmethod
+    # def encryptAll(dataFrame):
+    #     for key in dataFrame:
+    #         if isinstance(dataFrame[key], str):
+    #             dataFrame[key] = Encryption.encrypt(dataFrame[key])
+    #     return dataFrame
+    #
+    # @staticmethod
+    # def decryptAll(dataFrame):
+    #     for key in dataFrame:
+    #         try:
+    #             dataFrame[key] = Encryption.decrypt(dataFrame[key])
+    #         except:
+    #             pass
+    #     return dataFrame
 
     def jsonifyResponse(self):
         dataFrame = vars(self).copy()
         del dataFrame["_id"]
+        # dataFrame = self.encryptAll(dataFrame)
         response = {str(self._id): dataFrame}
         return response

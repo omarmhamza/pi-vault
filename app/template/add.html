@@ -6,46 +6,36 @@
             <!-- Start Page Content -->
             <!-- ============================================================== -->
             {%include "components/notification_messages.html" %}
+
             <form method="POST">
                 {{form.hidden_tag()}}
                 <div class="row">
-
                     <div class="col password-page">
                         <h2 class="text-center">Add Password to Vault</h2>
-
                         <div class="form-group">
                             <label for="website">Website</label>
-                            {{form.website(class_="form-control",id="website",placeholder="Website address such as www.pi-hole.com")}}
-                            <!--                            <input type="text" class="form-control" id="exampleInputEmail1"-->
-                            <!--                                   placeholder="Website address such as www.pi-hole.com">-->
+
+                    {{form.website(class_="form-control",id="website",placeholder="Website address such as www.pi-hole.com")}}
                         </div>
-
-
                         <div class="form-group">
                             <label for="cat">Assign an icon</label>
-
                             <select class="form-control form-control-lg" name="cat"
                                     style="font-family: 'Font Awesome\ 5 Brands'">
                                 <option value="f084"> Not assigned</option>
-
                                 {% for unicode,name in icons %}
                                 <option value="{{unicode}}">{{name}} {{ unicode | safe }} </option>
                                 {% endfor %}
-
                             </select>
                         </div>
-
-
                         <div class="form-group">
-                            <label for="email">Username</label>
-                            {{form.email(class_="form-control",id="email",placeholder="Email or username associated with the website",value="username")}}
 
+                            <label for="email">Username</label>
+
+                            {{form.email(class_="form-control",id="email",placeholder="Email or username associated with the website",value="username")}}
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             {{form.password(class_="form-control",id="password",placeholder="Password")}}
-
-
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" id="exampleCheck1" type="checkbox" onclick="toggleVisibility(document.getElementById('password'))">
@@ -81,14 +71,6 @@
                                        title="Add password to vault" ><i
                                 class="fas fa-lock"></i>
                         </button>
-                        <!--                        <button type="button" class="btn btn-lg btn-block btn-outline-danger" data-toggle="modal"-->
-                        <!--                                data-target="#exampleModal"><i class="fas fa-trash-alt"></i> Delete from Vault-->
-                        <!--                        </button>-->
-                        <!--                        <button type="submit" class="btn btn-lg btn-block btn-outline-warning"><i-->
-                        <!--                                class="fas fa-edit"></i> Save-->
-                        <!--                        </button>-->
-
-
                     </div>
                 </div>
             </form>
