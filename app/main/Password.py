@@ -1,4 +1,3 @@
-from .. import hashids
 from datetime import datetime
 import re
 from cryptography.fernet import Fernet
@@ -6,7 +5,7 @@ import shortuuid
 
 def load_key():
     """
-    Load the eviously generated key
+    Load the previously generated key
     """
     return open("/home/omar/secret.key", "rb").read()
 
