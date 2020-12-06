@@ -6,6 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    REMEMBER_COOKIE_DURATION = 60
 
 
 class DevelopmentConfig(Config):

@@ -1,11 +1,10 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
-from methods import getAccountId
 
 
 class Account:
-    def __init__(self, username, password="", facial_img=""):
+    def __init__(self, username="", password="", facial_img=""):
         self.username = username.lower()
         self.authentication = {
             "hashed": generate_password_hash(password),
@@ -32,7 +31,13 @@ class Account:
         return self.anonymous
 
     def get_id(self):
-        return getAccountId(self.username)
+        return int(self._id)
+
+    @staticmethod
+    def load_account(user):
+        account = Account(username=user["username"])
+        account._id = user["_id"]
+        return account
 
     @staticmethod
     def check_password(hashed, raw):
@@ -44,18 +49,13 @@ class Account:
 
     def jsonify(self):
         dataFrame = vars(self).copy()
-        del dataFrame["username"]
         del dataFrame["authenticated"]
         del dataFrame["anonymous"]
         del dataFrame["active"]
-
-        response = {
-            str(self.username): dataFrame
-
-        }
+        response = dataFrame
         return response
 
-# class User:
-#     def __init__(self,username,password):
-#         self.username = username
-#         self.password = password
+    @property
+    def id(self):
+        return self._id
+

@@ -12,6 +12,8 @@ login_manager = LoginManager()
 login_manager.login_view = 'main.login'
 login_manager.login_message = "You have to login to access this page"
 login_manager.login_message_category = "info"
+login_manager.session_protection = "strong"
+
 
 def run(config):
     app = Flask(__name__, template_folder='./template/')

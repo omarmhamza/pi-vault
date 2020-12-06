@@ -5,21 +5,20 @@ from Password import Password, Encryption
 from collections import deque
 from . import main
 from methods import *
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, fresh_login_required
 from Account import Account
 
-account_number = "OMAR"  # test field
+# session["name"] = "OMAR"  # test field
 
 
 @main.route("/", methods=["GET"])
 @login_required
 def index():
-    web_accounts = getPasswords(account_number)
+    web_accounts = getPasswords(session['id'])
     passwords_list = deque()
     for passwords in web_accounts:
         for id, details in passwords.items():
             # try:
-
             password = {"raw": Encryption.decrypt(details["encrypted"]),
                         "website": Encryption.decrypt(details["website"]),
                         "username": Encryption.decrypt(details["username"]), "icon": details["icon"], "id": id,
@@ -44,9 +43,10 @@ def addPassword():
                 icon=icon,
                 username=form.email.data,
                 raw=form.password.data,
-                _id=getPasswordCount(account_number) + 1
+                _id=12312321
+                # _id=getPasswordCount(session["name"]) + 1
             )
-            pushPassword(account_number, password.jsonifyResponse())
+            pushPassword(session['id'], password.jsonifyResponse())
             flash("You successfully added a password to the list", "success")
             return redirect("/")
         else:
@@ -73,16 +73,16 @@ def edit(id):
             "encrypted": Encryption.encrypt(form.password.data),
             "modified": str(date),
         }
-        updatePassword(account_number, id, password)
+        updatePassword(session['id'], id, password)
         flash("Successfully edited password", "info")
         return redirect("/")
-    return render_template("edit.html", icons=getIcons(), form=form, password=getPassword(account_number, id), id=id)
+    return render_template("edit.html", icons=getIcons(), form=form, password=getPassword(session['id'], str(id)), id=id)
 
 
 @main.route("/passwords/delete/<id>", methods=["GET"])
 @login_required
 def delete(id):
-    deletePassword(account_number, id)
+    deletePassword(session['id'],id)
     flash("Deleted password", "success")
     return redirect("/")
 
@@ -99,7 +99,7 @@ def login():
     if form.is_submitted() and form.validate_on_submit():
         username = form.username.data.lower()
         raw_pass = form.password.data
-        account = validateAccount(username, raw_pass)
+        account = validateAccount(username)
         if account:
             if Account.check_password(account["authentication"]["hashed"], raw_pass):
                 flash("You are signed in", "success")
@@ -107,8 +107,10 @@ def login():
                 user = Account(username, raw_pass)
                 user.authenticate()
                 user.authentication = user.active = True
-                x = login_user(user, rememberMe)
-                print x
+                user._id = account["_id"]
+                session['id'] = account["_id"]
+                session["username"] = username
+                login_user(user, rememberMe)
                 next_page = request.args.get('next')
                 if next_page is None or not next_page.startswith('/'):
                     next_page = url_for('main.index')
@@ -124,14 +126,18 @@ def login():
 
 @main.route("/signup", methods=["GET", "POST"])
 def signup():
-    account = Account("OMAR", "test")
+    account = Account("batata", "test")
     addAccount(account)
     return "added"
 
 
-# @main.route("/logout")
-# def logout():
-#     return int(getAccountId("omar")["_id"])
-    # logout_user()
-    # flash("You have been logged out","info")
-    # return redirect("/login")
+@main.route("/logout")
+def logout():
+    logout_user()
+    flash("You have been logged out","info")
+    return redirect("/login")
+
+
+@main.route("/test")
+def test():
+    return str(validateAccount("omar"))
