@@ -13,7 +13,9 @@ login_manager.login_view = 'main.login'
 login_manager.login_message = "You have to login to access this page"
 login_manager.login_message_category = "info"
 login_manager.session_protection = "strong"
-
+login_manager.refresh_view = 'main.login'
+login_manager.needs_refresh_message = "Session timedout, please re-login"
+login_manager.needs_refresh_message_category = "info"
 
 def run(config):
     app = Flask(__name__, template_folder='./template/')

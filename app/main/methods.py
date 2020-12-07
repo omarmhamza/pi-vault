@@ -87,7 +87,6 @@ def addAccount(account):
 
 def getAccountById(id):
     search = mongo.db.users.find_one({"_id":"{}".format(id)})
-    print search
     if search:
         return search
     else:

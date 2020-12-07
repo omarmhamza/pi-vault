@@ -1,6 +1,7 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
+from Password import Encryption
 
 
 class Account:
@@ -8,7 +9,7 @@ class Account:
         self.username = username.lower()
         self.authentication = {
             "hashed": generate_password_hash(password),
-            "face": ""
+            "face": Encryption.encrypt(facial_img)
         }
         now = datetime.now()
         date = now.strftime("%d/%m/%Y, %H:%M:%S")
@@ -36,6 +37,18 @@ class Account:
     @staticmethod
     def load_account(user):
         account = Account(username=user["username"])
+        account.total_passwords = user["total_passwords"]
+        account.created = user["created"]
+        master_pass = face = False
+        if len(user["authentication"]["hashed"]) > 0:
+            master_pass = True
+        if len(user["authentication"]["face"]) > 0:
+            face = True
+        account.authentication = {
+            "password_method": master_pass,
+            "face_method": face,
+            "image_data": Encryption.decrypt(user["authentication"]["face"])
+        }
         account._id = user["_id"]
         return account
 
