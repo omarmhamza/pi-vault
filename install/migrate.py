@@ -9,6 +9,7 @@ from config import config
 uri = config[ENV].MONGO_URI
 
 if uri:
+    print("Starting Migration")	
     client = MongoClient(uri)
     db = client["vault"]
     Collection = db["icons"]
@@ -18,3 +19,6 @@ if uri:
         Collection.insert_many(data)
     else:
         Collection.insert_one(data)
+    print("Done")
+else:
+    print("Connection to the database has failed, check your configuration!") 
