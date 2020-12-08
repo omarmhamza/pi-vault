@@ -1,6 +1,8 @@
 from .. import mongo
-from Password import Encryption
+from .Password import Encryption
 from .. import login_manager
+from werkzeug.security import generate_password_hash
+
 
 def getIcons():
     icons = []
@@ -12,13 +14,14 @@ def getIcons():
 
 
 def getIconFromList(value):
-    icon_selected = str(value.pop().decode('utf-8')).strip("&#x")
+    print(value)
+    icon_selected = str(value.pop()).strip("&#x")
     icon = mongo.db.icons.find_one({"unicode": icon_selected})
     return icon
 
 
 def getPasswords(account_id):
-    return mongo.db.users.find_one({"_id":"{}".format(account_id)})["passwords"]
+    return mongo.db.users.find_one({"_id": "{}".format(account_id)})["passwords"]
 
 
 def getPasswordCount(account):
@@ -30,11 +33,11 @@ def getPasswordCount(account):
 
 
 def getPassword(account_id, pass_id):
-    search = mongo.db.users.distinct("passwords.{}".format(pass_id),{"_id":"{}".format(account_id)})[0]
+    search = mongo.db.users.distinct("passwords.{}".format(pass_id), {"_id": "{}".format(account_id)})[0]
     if search:
         password = search
-        password["encrypted"]= Encryption.decrypt(search["encrypted"])
-        password["username"]= Encryption.decrypt(search["username"])
+        password["encrypted"] = Encryption.decrypt(search["encrypted"])
+        password["username"] = Encryption.decrypt(search["username"])
         password["website"] = Encryption.decrypt(search["website"])
         return password
     else:
@@ -43,7 +46,7 @@ def getPassword(account_id, pass_id):
 
 def pushPassword(id, password):
     mongo.db.users.update(
-        {"_id":"{}".format(id)},
+        {"_id": "{}".format(id)},
         {
             "$inc": {"total_passwords": 1},
             "$push": {"passwords": password}
@@ -67,13 +70,13 @@ def updatePassword(account_id, pass_id, password):
     )
 
 
-def deletePassword(account_id,pass_id):
+def deletePassword(account_id, pass_id):
     mongo.db.users.update(
-        {"_id":"{}".format(account_id),"passwords.{}".format(pass_id): {"$exists": "true"}},
-        {"$unset": {"passwords.$":{"$exists": "true"}}}
+        {"_id": "{}".format(account_id), "passwords.{}".format(pass_id): {"$exists": "true"}},
+        {"$unset": {"passwords.$": {"$exists": "true"}}}
     )
     mongo.db.users.update(
-        {"_id":"{}".format(account_id)},
+        {"_id": "{}".format(account_id)},
         {
             "$inc": {"total_passwords": -1},
             "$pull": {"passwords": None}
@@ -85,8 +88,29 @@ def addAccount(account):
     mongo.db.users.insert(account.jsonify())
 
 
+def updateCredentials(user_id, username, password):
+    mongo.db.users.update(
+        {"_id": "{}".format(user_id)},
+        {"$set": {
+            "username": str(username),
+            "authentication.hashed": generate_password_hash(str(password))
+        }
+        }
+    )
+
+
+def checkAvailability(username):
+    if username:
+        search = mongo.db.users.find_one({"username": "{}".format(username)})
+        if search:
+            return False
+        else:
+            return True
+    return None
+
+
 def getAccountById(id):
-    search = mongo.db.users.find_one({"_id":"{}".format(id)})
+    search = mongo.db.users.find_one({"_id": "{}".format(id)})
     if search:
         return search
     else:
@@ -94,7 +118,7 @@ def getAccountById(id):
 
 
 def validateAccount(username):
-    search = mongo.db.users.find_one({"username":"{}".format(username)})
+    search = mongo.db.users.find_one({"username": "{}".format(username)})
     if search:
         return search
     else:
@@ -103,6 +127,6 @@ def validateAccount(username):
 
 @login_manager.user_loader
 def load_user(id):
-    from Account import Account
+    from .Account import Account
     user = getAccountById(id)
     return Account.load_account(user)

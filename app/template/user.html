@@ -21,7 +21,7 @@
                                         <a href="javascript:void(0)"><img src="data:image/jpeg;base64,{{user.authentication.image_data}}"
                                                 class="thumb-lg img-circle" alt="img"></a>
                                         {%else%}
-                                        <a href="javascript:void(0)"><img src="static/plugins/images/user_con.png"
+                                        <a href="javascript:void(0)"><img src="static/plugins/images/user_icon.png"
                                                                           class="thumb-lg img-circle" alt="img"></a>
                                         {%endif%}
                                         <h4 class="text-white mt-2">{{user.username}}</h4>
@@ -44,24 +44,27 @@
                     <div class="col-lg-8 col-xlg-9 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material">
+                                <form class="form-horizontal form-material" method="POST">
+                                                    {{form.hidden_tag()}}
+
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Username</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Insert your username here"
-                                                class="form-control p-0 border-0" value={{user.username}}> </div>
+                    {{form.username(class_="form-control p-0 border-0",placeholder="Insert your username here",value=user.username)}}
+
+                                        </div>
                                     </div>
                                     {%if user.authentication.password_method %}
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Master Password</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="password" value="password" class="form-control p-0 border-0">
+                    {{form.password(class_="form-control p-0 border-0",placeholder="Insert your new password here")}}
                                         </div>
                                     </div>
                                     {%endif%}
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
+                                            <button class="btn btn-success" type="submit">Update Profile</button>
                                         </div>
                                     </div>
                                 </form>

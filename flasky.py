@@ -1,6 +1,8 @@
 
 from app import run
 
-app = run('development')
+ENV = "development"
+
+app = run(ENV)
 
 

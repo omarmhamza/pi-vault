@@ -3,7 +3,7 @@ import lxml.html as lh
 import pymongo
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["vault"]
-mycol = mydb["icons"]
+mycol = mydb["icons2"]
 
 url = 'https://www.fontawesomecheatsheet.com/font-awesome-cheatsheet-5x/'
 # Create a handle, page, to handle the contents of the website
@@ -35,17 +35,19 @@ for T in tr_elements[2:]:
             {
                 "name":str(x[0]),
                 "unicode":str(x[2]),
-                "tags":x[3]
+                "tags":x[3],
+                "_id": w
             })
+        w+=1
     except:
         pass
     if x:
         print(w,x)
-        w+=1
 
 mycol.insert_one(
         {
             "name":str("Key"),
             "unicode":str("f084"),
-            "tags":[]
+            "tags":[],
+             "_id": w
         })

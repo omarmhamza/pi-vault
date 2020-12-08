@@ -3,11 +3,19 @@ import re
 from cryptography.fernet import Fernet
 import shortuuid
 
+
+def create_key():
+    key = Fernet.generate_key().decode("utf-8")
+    f = open("../secret.key","w")
+    f.write(key)
+    f.close()
+
+
 def load_key():
     """
     Load the previously generated key
     """
-    return open("/home/omar/secret.key", "rb").read()
+    return open("secret.key", "rb").read()
 
 
 class Encryption:
@@ -17,13 +25,13 @@ class Encryption:
         encoded_message = raw.encode()
         f = Fernet(key)
         encrypted_message = f.encrypt(encoded_message)
-        return str(encrypted_message)
+        return str(encrypted_message.decode("utf-8"))
 
     @staticmethod
     def decrypt(encrypted):
         key = load_key()
         f = Fernet(key)
-        decrypted_message = f.decrypt(bytes(encrypted))
+        decrypted_message = f.decrypt(bytes(encrypted,encoding='utf8'))
         return decrypted_message.decode()
 
 
