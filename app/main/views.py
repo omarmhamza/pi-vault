@@ -8,7 +8,7 @@ from . import main
 from .methods import *
 from flask_login import login_user, login_required, logout_user, fresh_login_required, current_user
 from .Account import Account
-
+from . import error_views
 
 
 
@@ -134,10 +134,8 @@ def login():
                 rememberMe = form.rememberMe.data
                 user = Account(username, raw_pass)
                 user.authenticate()
-                user.authentication = user.active = True
                 user._id = account["_id"]
                 session['id'] = account["_id"]
-                session["username"] = username
                 is_logged = login_user(user, rememberMe)
                 if is_logged:
                     if rememberMe:
@@ -164,11 +162,15 @@ def signup():
         username = form.username.data
         password = form.password.data
         if checkAvailability(username):
-            account = Account(username=username,password=password)
-            addAccount(account)
-            flash("You have successfully created an account","success")
-            if current_user.is_authenticated:
-                flash("You have to logout from your signed in account to access your new one.","info")
+            user = Account(username=username,password=password)
+            addAccount(user)
+            user.authenticate()
+            session['id'] = user._id
+            is_logged = login_user(user)
+            if is_logged:
+                flash("You have successfully created an account and signed in","success")
+            else:
+                flash("Accounted created successfully.","info")
             return redirect("/")
         else:
             flash("This username is taken, try another one.","error")
@@ -183,12 +185,7 @@ def logout():
     return redirect("/login")
 
 
-@main.route("/test")
-def test():
-    return str(checkAvailability("face34"))
 
 
-@login_manager.unauthorized_handler
-def unauthorized():
-    flash("You have no authorization to access this page, please login first.", "error")
-    return redirect("/login")
+
+

@@ -16552,10 +16552,12 @@ html body .waves-notransition {
     border-width: 3px 3px;
     border-color: rgb(111, 123, 210);
     text-align: center;
+    margin: 20px;
 }
 
 .options i {
-    margin: 50px;
+    margin: 20px;
+    padding: 20px;
 }
 
 .options h5 {
@@ -16584,8 +16586,7 @@ html body .waves-notransition {
 
 
 .login-logo {
-    margin-top: 20px;
-    margin-bottom: 150px;
+    margin-top: 5px;
 }
 
 .signup-footer a {
