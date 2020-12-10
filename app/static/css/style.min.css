@@ -16493,12 +16493,12 @@ html body .waves-notransition {
 
 .cat-icon {
     font-family: 'Font Awesome\ 5 Brands', 'Font Awesome\ 5 Free';
-    font-size: 20px;
+    font-size: 50px;
 }
 
 .key-icon {
     font-family: 'Font Awesome\ 5 Brands', 'Font Awesome\ 5 Free';
-    font-size: 20px;
+    font-size: 50px;
     font-weight: 600;
 }
 
@@ -16528,6 +16528,10 @@ html body .waves-notransition {
     text-align: center;
 }
 
+.icon:hover{
+    transform: scale(1.1);
+}
+
 #search {
     width: 100%;
     padding: 10px 60px;
@@ -16535,7 +16539,11 @@ html body .waves-notransition {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    border-width: 2px;
+    border-color: rgb(47,50,62);
 }
+
+
 
 
 
@@ -16611,5 +16619,71 @@ html body .waves-notransition {
 }
 
 .footer{
-    margin-top: 50px !important;
+    background-color: rgb(237,241,245);
+}
+
+.password-card{
+    background-color: rgb(47,50,62);
+    border-radius: 12px;
+}
+
+.password-card:hover{
+     transform: scale(1.05);
+    border-color: rgb(112,124,210);
+    border-width: 5px;
+}
+
+#main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5], #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5] ul, #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5], #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5] ul {
+    background: rgb(47,50,62);
+}
+
+.validURL{
+    color: white;
+}
+
+.validURL:hover{
+    font-size: 20px;
+    color: white;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.show-password{
+    filter: blur(5px);
+    border-width: 0.1px;
+    border-color: black;
+    border-style: dashed;
+}
+
+.show-password:hover{
+    filter: blur(0px);
+    border-style: hidden;
+}
+
+.card-buttons{
+    font-size: 17px;
+    margin: 5px;
+}
+.edit-button:hover{
+    transform: scale(1.1);
+}
+
+
+.navbar-brand{
+    background-color: rgb(237,241,245) !important;
 }

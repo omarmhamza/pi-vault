@@ -23,15 +23,16 @@ def index():
         passwords_list = deque()
         for passwords in web_accounts:
             for id, details in passwords.items():
-                # try:
-                password = {"raw": Encryption.decrypt(details["encrypted"]),
-                            "website": Encryption.decrypt(details["website"]),
-                            "username": Encryption.decrypt(details["username"]), "icon": details["icon"], "id": id,
-                            "validURL": details["validURL"], "created": details["created"]
-                            }
-                passwords_list.append(password)
-                # except:
-                #     continue
+                try:
+                    password = {"raw": Encryption.decrypt(details["encrypted"]),
+                                "website": Encryption.decrypt(details["website"]),
+                                "username": Encryption.decrypt(details["username"]), "icon": details["icon"], "id": id,
+                                "validURL": details["validURL"], "created": details["created"],
+                                "modified": details["modified"]
+                                }
+                    passwords_list.append(password)
+                except:
+                    continue
         sorted_pass = sorted(passwords_list, key=lambda i: i['created'], reverse=True)
         return render_template("passwords.html", passwords=sorted_pass, user=user)
 

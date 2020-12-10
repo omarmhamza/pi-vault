@@ -47,6 +47,7 @@ class Password:
         self.website = Encryption.encrypt(self.website)
         self.username = Encryption.encrypt(username)
         self.validURL = True if self.validateURL(website) else False
+        self.modified = ""
         now = datetime.now()
         date = now.strftime("%d/%m/%Y, %H:%M:%S")
         self.created = date

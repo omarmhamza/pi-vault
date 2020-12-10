@@ -1,22 +1,42 @@
 
 
-<aside class="left-sidebar" data-sidebarbg="skin6">
+<aside class="left-sidebar" data-sidebarbg="skin5">
         <!-- Sidebar scroll-->
-        <div class="scroll-sidebar">
+        <div class="scroll-sidebar ">
             <!-- Sidebar navigation-->
+            <nav class="sidebar-nav" >
+                <ul id="sidebarnav" class="in">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link has-arrow waves-effect waves-dark active" href="javascript:void(0)" aria-expanded="false">
+                                <i class="fas fa-key text-white"></i>
+                                <span class="hide-menu"> Passwords</span>
+                                <span class="badge badge-inverse badge-pill ml-auto mr-3 font-medium px-2 py-1">2</span>
+                            </a>
 
-            <nav class="sidebar-nav">
-                <ul id="sidebarnav">
-                    <li class="sidebar-item"><a aria-expanded="false"
-                                                class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                href="/"><i aria-hidden="true"
-                                                                         class="fas fa-key fa-fw"></i><span
-                            class="hide-menu">Password Vault</span></a></li>
-<!--                    <li class="sidebar-item"><a aria-expanded="false"-->
-<!--                                                class="sidebar-link waves-effect waves-dark sidebar-link"-->
-<!--                                                href="profile.html">-->
-<!--                        <i aria-hidden="true" class="fa fa-cog"></i><span class="hide-menu">Settings</span></a>-->
-<!--                    </li>-->
+                    <ul aria-expanded="false" class="collapse first-level in">
+                                <li class="sidebar-item">
+                                    <a href="/" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"><i aria-hidden="true"
+                                                                         class="fas fa-lock"></i> Vault </span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a href="/passwords/add" class="sidebar-link">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"><i aria-hidden="true"
+                                                                         class="fas fa-plus-circle"></i> Add Password </span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                    </li>
+
+
+
+
+
                     <li class="sidebar-item"><a aria-expanded="false"
                                                 class="sidebar-link waves-effect waves-dark sidebar-link"
                                                 href="/profile">

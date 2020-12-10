@@ -9,10 +9,12 @@ class Config:
     VERSION = "1.0.0"
     # REMEMBER_COOKIE_DURATION = timedelta(minutes=120)
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
+    LOGIN_DISABLED = False
 
 class DevelopmentConfig(Config):
     VERSION = "dev 1.0.0"
     MONGO_URI = "mongodb://localhost:27017/vault"
+    LOGIN_DISABLED = True
 
 
 config = {
