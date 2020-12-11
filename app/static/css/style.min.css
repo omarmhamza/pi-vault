@@ -14,6 +14,15 @@
     -moz-transform: rotate(45deg);
 }
 
+@font-face {
+  font-family: 'OCR A Extended V2';
+  src: url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.svg') format('svg'); /* Legacy iOS */
+}
+
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -52,7 +61,7 @@
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --breakpoint-xlg: 1600px;
-    --font-family-sans-serif: "Rubik", sans-serif;
+    --font-family-sans-serif:  "Rubik", sans-serif;
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -16592,8 +16601,18 @@ html body .waves-notransition {
 }
 
 
-.login-logo {
-    margin-top: 5px;
+
+
+#login{
+    background-color: rgb(237,241,245);
+}
+#signup{
+    background-color: rgb(237,241,245);
+}
+
+
+html {
+    background-color: rgb(237,241,245) !important;
 }
 
 .signup-footer a {
@@ -16681,3 +16700,26 @@ html body .waves-notransition {
 .navbar-brand{
     background-color: rgb(237,241,245) !important;
 }
+
+.confirm-delete-button{
+    border-width: 2px;
+    border-style: solid;
+}
+
+.introduction{
+    font-family: "OCR A Extended V2";
+    background-color: rgb(237,241,245);
+    margin:10px;
+    padding: 0;
+    }
+
+.page-wrapper-noNav{
+        background-color: rgb(237,241,245);
+
+}
+
+.page-wrapper{
+        background-color: rgb(237,241,245);
+
+}
+

@@ -2,10 +2,8 @@ from flask import render_template, session, redirect, url_for, request, flash, a
 from . import main
 from .. import login_manager
 
-
 @login_manager.unauthorized_handler
 def unauthorized():
-    flash("You have no authorization to access this page, please login first.", "error")
     return redirect("/login")
 
 @main.errorhandler(404)

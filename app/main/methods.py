@@ -1,3 +1,4 @@
+from flask import make_response, redirect, flash
 from .. import mongo
 from .Password import Encryption
 from .. import login_manager
@@ -124,9 +125,20 @@ def validateAccount(username):
     else:
         return None
 
+def deleteAccount(user_id):
+    search = mongo.db.users.delete_one({"_id": "{}".format(user_id)})
+    print(search)
+
+def getNumberOfAccounts():
+    return mongo.db.users.count()
 
 @login_manager.user_loader
 def load_user(id):
     from .Account import Account
     user = getAccountById(id)
-    return Account.load_account(user)
+    if user is None: #if the user has been deleted from another device
+        flash("This account does not exist anymore.","info")
+        resp = make_response(redirect("/"))
+        resp.set_cookie('id', expires=0)
+    else:
+        return Account.load_account(user)

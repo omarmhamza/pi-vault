@@ -5,7 +5,9 @@ import platform
 import requests
 from app import mongo
 from app import login_manager
-from flask_login import   fresh_login_required, current_user
+from flask_login import fresh_login_required, current_user
+
+
 def get_size(bytes, suffix="B"):
     """
     Scale bytes to its proper format
@@ -18,6 +20,11 @@ def get_size(bytes, suffix="B"):
         if bytes < factor:
             return "{} {}{}".format(round(bytes), unit, suffix)
         bytes /= factor
+
+
+@version.route("/about", methods=["GET"])
+def about():
+    return render_template("about.html")
 
 
 @version.route("/", methods=["GET"])
@@ -53,3 +60,5 @@ def version():
     }
 
     return render_template("version-info.html", sys=system_information,stack=stack_information,user=current_user)
+
+

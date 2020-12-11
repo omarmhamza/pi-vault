@@ -1,97 +1,192 @@
 {%extends "components/skeleton.html" %}
 
 {%block content %}
-        <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
-            {%include "components/notification_messages.html" %}
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Row -->
-                <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-12">
-                        <div class="white-box">
-                            <div class="user-bg">
-                                <div class="overlay-box">
-                                    <div class="user-content">
-                                        {%if user.authentication.face_method%}
-                                        <a href="javascript:void(0)"><img src="data:image/jpeg;base64,{{user.authentication.image_data}}"
-                                                class="thumb-lg img-circle" alt="img"></a>
-                                        {%else%}
-                                        <a href="javascript:void(0)"><img src="static/plugins/images/user_icon.png"
-                                                                          class="thumb-lg img-circle" alt="img"></a>
-                                        {%endif%}
-                                        <h4 class="text-white mt-2">{{user.username}}</h4>
-                                        <h5 class="text-white mt-2">Created on: {{user.created}}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-btm-box mt-5 d-md-flex">
-                                <div class="col-md-12 col-sm-12 text-center">
-                                    <small><i class="fas fa-key fa-fw"></i></small>
-                                    <h1>{{user.total_passwords}}</h1>
-                                    <small> Passwords Stored</small>
-                                </div>
-                            </div>
+<div class="container-fluid" id="profile">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    {%include "components/notification_messages.html" %}
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete account confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+          <form method="POST">
+
+      <div class="modal-body text-center">
+          <p class="text-center">To confirm please type <b style="font-size: 15px">{{user.username}}</b> below</p>
+          <input type="text" class="text-center confirm-delete-button" placeholder={{user.username}} :value="confirmUser" @input="e => confirmUser = e.target.value"
+ :style="confirmDeleteFieldColor" id="confirmDelete">
+                                    <br><small class="text-danger">This action is irreversible</small>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <a href="/profile/delete"><button type="button" class="btn btn-danger" :disabled="!confirmDelete" >Delete</button></a>
+
+      </div>
+        </form>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <div class="user-bg">
+                    <div class="overlay-box">
+                        <div class="user-content">
+                            {%if user.authentication.face_method%}
+                            <a href="javascript:void(0)"><img
+                                    src="data:image/jpeg;base64,{{user.authentication.image_data}}"
+                                    class="thumb-lg img-circle" alt="img"></a>
+                            {%else%}
+                            <a href="javascript:void(0)"><img src="static/plugins/images/user_icon.png"
+                                                              class="thumb-lg img-circle" alt="img"></a>
+                            {%endif%}
+                            <h4 class="text-white mt-2">{{user.username}}</h4>
+                            <h5 class="text-white mt-2">Created on: {{user.created}}</h5>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal form-material" method="POST">
-                                                    {{form.hidden_tag()}}
-
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Username</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                    {{form.username(class_="form-control p-0 border-0",placeholder="Insert your username here",value=user.username)}}
-
-                                        </div>
-                                    </div>
-                                    {%if user.authentication.password_method %}
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Master Password</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                    {{form.password(class_="form-control p-0 border-0",placeholder="Insert your new password here")}}
-                                        </div>
-                                    </div>
-                                    {%endif%}
-                                    <div class="form-group mb-4">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success" type="submit">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
                 </div>
-                <!-- Row -->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+                <div class="user-btm-box mt-5 d-md-flex">
+                    <div class="col-md-12 col-sm-12 text-center">
+                        <small><i class="fas fa-key fa-fw"></i></small>
+                        <h1>{{user.total_passwords}}</h1>
+                        <small> Passwords Stored</small>
+                    </div>
+                </div>
+
             </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" method="POST">
+                        {{form.hidden_tag()}}
+
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Username</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                {{form.username(class_="form-control p-0 border-0",placeholder="Insert your username here",value=user.username)}}
+
+                            </div>
+                        </div>
+                        {%if user.authentication.password_method %}
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Master Password</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                {{form.password(class_="form-control p-0 border-0",placeholder="Insert your new password here",**{'v-model':'password'})}}
+                            </div>
+                        </div>
+                          <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Re-enter Master password</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                <input :disabled="! password" v-model="reEnterPassword" class="form-control p-0 border-0" placeholder="Re-enter your new Master password here">
+                                <small class="text-danger" v-model="matchNotify">[[error]]</small>
+                            </div>
+
+                        </div>
+                        {%endif%}
+                        <div class="form-group mb-4">
+                            <div class="col-lg-12">
+                                <button :disabled="!canUpdate" class="btn btn-success" type="submit">Update Profile</button>
+                                <button class="btn btn-danger float-right" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user-times"></i>
+  Delete account</button>
+
+
+
+                        </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+</div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+
+
+
 
 {%endblock%}
 
 {%block scripts%}
+<script src="../static/js/vue.js"></script>
+
 <script>
 
     window.onload = getNotifications;
+      var app = new Vue({
+          el: '#profile',
+          data: {
+            confirmUser: '',
+            username : "{{user.username | safe}}",
+            password: '',
+            reEnterPassword: '',
+            error : ''
+          },
+          computed: {
+              confirmDelete : function (){
+                  if (this.confirmUser.trim() === this.username)
+                      return true
+                  else return false
+              },
+
+              confirmDeleteFieldColor: function (){
+                  if(this.confirmDelete){
+                      return {"border-color": "green"}
+                  }else{
+                      return {"border-color": "red"}
+                  }
+              },
+
+              matchNotify: function (){
+                if (this.password !== this.reEnterPassword){
+                    this.error = "Passwords do not match"
+                }else{
+                    this.error = ""
+                }
+              },
+
+              canUpdate: function (){
+
+                  if(this.password.length >0 && this.username && this.reEnterPassword.length > 0 && this.password === this.reEnterPassword)
+                      return true
+                  return false
+              }
+
+          },
+        delimiters: ['[[', ']]']
+      })
 
 </script>
 {%endblock%}

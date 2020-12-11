@@ -11,7 +11,6 @@ from .Account import Account
 from . import error_views
 
 
-
 @main.route("/", methods=["GET"])
 @login_required
 def index():
@@ -101,7 +100,7 @@ def delete(id):
     return redirect("/")
 
 
-@main.route("/profile", methods=["GET","POST"])
+@main.route("/profile", methods=["GET", "POST"])
 @fresh_login_required
 def profile():
     if not current_user.is_authenticated:
@@ -111,18 +110,33 @@ def profile():
         form = Login()
         if form.is_submitted() and form.validate_on_submit():
             if checkAvailability(form.username):
-                updateCredentials(user._id,form.username.data,form.password.data)
-                flash("Updated credentials","success")
+                updateCredentials(user._id, form.username.data, form.password.data)
+                flash("Updated credentials", "success")
                 return redirect("/profile")
             else:
-                flash("This username is taken, please try another one.","error")
-    return render_template("user.html", user=current_user,form=form)
+                flash("This username is taken, please try another one.", "error")
+    return render_template("user.html", user=current_user, form=form)
+
+
+@main.route("/profile/delete", methods=["GET", "POST"])
+@fresh_login_required
+def deleteProfile():
+    if not current_user.is_authenticated:
+        return current_app.login_manager.unauthorized()
+    else:
+        user = current_user
+        deleteAccount(user._id)
+        logout_user()
+        flash("Your account have been deleted", "success")
+        return redirect("/")
 
 
 @main.route("/login", methods=["GET", "POST"])
 def login():
+    if getNumberOfAccounts() == 0:
+        return redirect("version/about")
     if current_user.is_authenticated:
-        flash("{} you are already logged in".format(current_user.username),"info")
+        flash("{} you are already logged in".format(current_user.username), "info")
         return redirect("/")
     form = Login()
     if form.is_submitted() and form.validate_on_submit():
@@ -163,20 +177,19 @@ def signup():
         username = form.username.data
         password = form.password.data
         if checkAvailability(username):
-            user = Account(username=username,password=password)
+            user = Account(username=username, password=password)
             addAccount(user)
             user.authenticate()
             session['id'] = user._id
             is_logged = login_user(user)
             if is_logged:
-                flash("You have successfully created an account and signed in","success")
+                flash("You have successfully created an account and signed in", "success")
             else:
-                flash("Accounted created successfully.","info")
+                flash("Accounted created successfully.", "info")
             return redirect("/")
         else:
-            flash("This username is taken, try another one.","error")
-    return render_template("signup.html",form=form)
-
+            flash("This username is taken, try another one.", "error")
+    return render_template("signup.html", form=form)
 
 
 @main.route("/logout")
@@ -184,9 +197,3 @@ def logout():
     logout_user()
     flash("You have been logged out", "info")
     return redirect("/login")
-
-
-
-
-
-
