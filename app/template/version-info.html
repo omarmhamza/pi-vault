@@ -1,37 +1,48 @@
-{%extends "components/skeleton_without_nav.html" %}
+
+
+
+{%extends "components/skeleton.html" %}
 
 {%block content %}
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            {%include "components/notification_messages.html" %}
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h2 class="text-center">Version Notes</h2><br>
+                    <ul class="list-group">
+                        {%for key,value in stack.items()%}
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                            {{key}}
+                            <span class="badge badge-primary badge-pill version-pill">{{value}}</span>
+                            {%endfor%}
+                    </ul>
+                    <br>
+                    <h2 class="text-center">Hardware Specification</h2><br>
+        
+                    <ul class="list-group">
+                        {%for key,value in sys.items()%}
+                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                            {{key}}
+                            <span class="badge badge-primary badge-pill version-pill">{{value}}</span>
+                            {%endfor%}
+                    </ul>
+                    
+                </div>
+            </div>
+ 
 
 
-<div class="container-fluid" id="login">
-    <div class="row justify-content-center i-am-centered">
-        <div class="col-md-6">
-            <h2 class="text-center">Version Notes</h2><br>
-            <ul class="list-group">
-                {%for key,value in stack.items()%}
-                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                    {{key}}
-                    <span class="badge badge-primary badge-pill version-pill">{{value}}</span>
-                    {%endfor%}
-            </ul>
-            <br>
-            <h2 class="text-center">Hardware Specification</h2><br>
-
-            <ul class="list-group">
-                {%for key,value in sys.items()%}
-                <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                    {{key}}
-                    <span class="badge badge-primary badge-pill version-pill">{{value}}</span>
-                    {%endfor%}
-            </ul>
-            <br>
-            <a href="/"> <button class="btn-primary text-center version-back-button"> <i
-                    class="fas fa-arrow-left"></i>
-            </button>
-        </a>
         </div>
-    </div>
-</div>
+
 {%endblock%}
+
+
+
+
+
+
 
 

@@ -16537,9 +16537,8 @@ html body .waves-notransition {
     padding: 10px 60px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
     box-sizing: border-box;
-    border-width: 2px;
+    border-width: 0.5px;
     border-color: rgb(47,50,62);
 }
 
@@ -16628,9 +16627,9 @@ html body .waves-notransition {
 }
 
 .password-card:hover{
-     transform: scale(1.05);
+     transform: scale(1.01);
     border-color: rgb(112,124,210);
-    border-width: 5px;
+    border-width: 4px;
 }
 
 #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5], #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5] ul, #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5], #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5] ul {
@@ -16646,26 +16645,14 @@ html body .waves-notransition {
     color: white;
 }
 
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
 
 .show-password{
     filter: blur(5px);
-    border-width: 0.1px;
+    margin: 10px;
+}
+
+.show-password-area{
+    border-width: 0.3px;
     border-color: black;
     border-style: dashed;
 }
@@ -16679,8 +16666,15 @@ html body .waves-notransition {
     font-size: 17px;
     margin: 5px;
 }
+
+
+.edit-button{
+    color: white;
+    font-size: 18px;
+}
 .edit-button:hover{
     transform: scale(1.1);
+    color: rgb(112,124,210);
 }
 
 
