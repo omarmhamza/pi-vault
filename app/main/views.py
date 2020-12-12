@@ -1,4 +1,5 @@
 from datetime import datetime
+import pymongo
 from flask import render_template, session, redirect, url_for, request, flash, abort, current_app
 from flask_login import login_user, login_required, logout_user, fresh_login_required, current_user
 from is_safe_url import is_safe_url
@@ -11,7 +12,15 @@ from .methods import *
 from . import error_views
 
 
+@main.route("/test")
+@checkDbConnection
+def test():
+    x = mongo.cx.server_info()
+    return "ss"
+
+
 @main.route("/", methods=["GET"])
+@checkDbConnection
 @login_required
 def index():
     if not current_user.is_authenticated:
@@ -36,7 +45,8 @@ def index():
         return render_template("passwords.html", passwords=sorted_pass, user=user)
 
 
-@main.route("/passwords/add", methods=["GET", "POST"])
+@main.route("/passwords/add", methods=["GET", "POST"],endpoint='addPassword')
+@checkDbConnection
 @login_required
 def addPassword():
     if not current_user.is_authenticated:
@@ -66,6 +76,7 @@ def addPassword():
 
 
 @main.route("/passwords/edit/<id>", methods=["GET", "POST"])
+@checkDbConnection
 @login_required
 def edit(id):
     if not current_user.is_authenticated:
@@ -93,6 +104,7 @@ def edit(id):
 
 
 @main.route("/passwords/delete/<id>", methods=["GET"])
+@checkDbConnection
 @login_required
 def delete(id):
     deletePassword(session['id'], id)
@@ -101,6 +113,7 @@ def delete(id):
 
 
 @main.route("/profile", methods=["GET", "POST"])
+@checkDbConnection
 @fresh_login_required
 def profile():
     if not current_user.is_authenticated:
@@ -119,6 +132,7 @@ def profile():
 
 
 @main.route("/profile/delete", methods=["GET", "POST"])
+@checkDbConnection
 @fresh_login_required
 def deleteProfile():
     if not current_user.is_authenticated:
@@ -131,8 +145,10 @@ def deleteProfile():
 
 
 @main.route("/login", methods=["GET", "POST"])
+@checkDbConnection
 def login():
     if getNumberOfAccounts() == 0:
+        flash("Get started by creating an account!", "info")
         return redirect("version/about")
     if current_user.is_authenticated:
         flash("{} you are already logged in".format(current_user.username), "info")
@@ -170,6 +186,7 @@ def login():
 
 
 @main.route("/signup", methods=["GET", "POST"])
+@checkDbConnection
 def signup():
     form = Signup()
     if form.is_submitted() and form.validate_on_submit():
@@ -192,17 +209,23 @@ def signup():
 
 
 @main.route("/logout")
+@checkDbConnection
 def logout():
     logout_user()
     flash("You have been logged out", "info")
     return redirect("/login")
 
+
 @login_manager.user_loader
 def load_user(id):
-    user = getAccountById(id)
-    if user is None: #if the user has been deleted from another device
-        flash("This account does not exist anymore.","info")
-        expire_cookie = make_response(redirect("/version/about"))
-        expire_cookie.set_cookie('id', expires=0)
-    else:
-        return Account.load_account(user)
+    try:
+        mongo.cx.server_info()
+        user = getAccountById(id)
+        if user is None:  # if the user has been deleted from another device
+            flash("This account does not exist anymore.", "info")
+            expire_cookie = make_response(redirect("/version/about"))
+            expire_cookie.set_cookie('id', expires=0)
+        else:
+            return Account.load_account(user)
+    except pymongo.errors.ServerSelectionTimeoutError:
+        redirect("/version/about")

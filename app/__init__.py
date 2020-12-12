@@ -10,7 +10,6 @@ login_manager = LoginManager()
 login_manager.session_protection = "strong"
 
 
-
 def run(config):
     app = Flask(__name__, template_folder='./template/')
     if config == "production":

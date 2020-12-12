@@ -1,8 +1,23 @@
+from functools import wraps
+
+import pymongo
 from flask import make_response, redirect, flash
 from .. import mongo
 from .Password import Encryption
 from .. import login_manager
 from werkzeug.security import generate_password_hash
+
+
+def checkDbConnection(func):
+    @wraps(func)
+    def exception(*args, **kwargs):
+        try:
+            function = func(*args, **kwargs)
+            return function
+        except pymongo.errors.ServerSelectionTimeoutError:
+            flash("DB connection error", "error")
+            return redirect("/version/about")
+    return exception
 
 
 def getIcons():
@@ -125,10 +140,11 @@ def validateAccount(username):
     else:
         return None
 
+
 def deleteAccount(user_id):
     search = mongo.db.users.delete_one({"_id": "{}".format(user_id)})
     print(search)
 
+
 def getNumberOfAccounts():
     return mongo.db.users.count()
-

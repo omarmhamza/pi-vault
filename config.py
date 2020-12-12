@@ -17,7 +17,8 @@ class DevelopmentConfig(Config):
     VUE = "vue.js"
     REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
-
+    # MONGO_CONNECT_TIMEOUT_MS = 2
+    # MONGO_SOCKET_TIMEOUT_MS = 2
 
 class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = timedelta(minutes=5)

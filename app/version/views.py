@@ -1,9 +1,10 @@
-from flask import render_template, session, redirect, url_for, request, flash, abort, current_app
+from flask import render_template
 from . import version
 import psutil
 import platform
 import requests
 from flask_login import fresh_login_required, current_user
+from .. import mongo
 
 
 def get_size(bytes, suffix="B"):
@@ -33,6 +34,7 @@ def version():
             server_response = requests.get('http://127.0.0.1:5000').headers
             server = server_response["Server"]
         except:
+            server = "Unkown"
             pass
         uname = platform.uname()
         svmem = psutil.virtual_memory()
@@ -52,11 +54,9 @@ def version():
     }
     python_version = platform.python_version()
     stack_information = {
-        "Python": python_version if python_version else "Unknown" ,
-        "MongoDB": "4.4.2",
+        "Python": python_version if python_version else "Unknown",
+        "MongoDB": mongo.cx.server_info()["version"],
         "Vue.js": "2.6.12"
     }
 
-    return render_template("version-info.html", sys=system_information,stack=stack_information,user=current_user)
-
-
+    return render_template("version-info.html", sys=system_information, stack=stack_information, user=current_user)
