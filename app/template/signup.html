@@ -5,124 +5,132 @@
 
 <div class="container-fluid" id="signup">
 
-    <div class="col-lg-12 login-logo" align="center">
-    <img src="/static/plugins/images/logo1.png" alt="homepage" width="200" height="50"/>
-  </div>
-<div class="i-am-centered">
-                       {%include "components/notification_messages.html" %}
-<h2 class="text-center" style="margin-bottom: 20px">Create an account</h2>
-<div v-if="!passMethod && !faceMethod">
-
-  <div class="row justify-content-center">
-  <div class="col-lg-4">
-
-    <div class="card options">
-      <div class="card-body">
-        <a class="card-block stretched-link text-decoration-none" @click="passwordAuth">
-          </a>
-                <i class="fas fa-key fa-4x "></i>
-        <h5 class="card-title">Master Password</h5>
-        <p class="card-text" >Sign up using a master password</p>
-      </div>
+    <div align="center" class="col-lg-12 login-logo">
+        <img alt="homepage" height="50" src="/static/plugins/images/logo1.png" width="200"/>
     </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="card options">
-      <div class="card-body">
-             <a class="card-block stretched-link text-decoration-none"  @click="faceAuth">
-          </a>
-                <i class="fas fa-camera fa-4x"></i>
+    <div class="i-am-centered">
+        {%include "components/notification_messages.html" %}
+        <h2 class="text-center" style="margin-bottom: 20px">Create an account</h2>
+        <div v-if="!passMethod && !faceMethod">
 
-        <h5 class="card-title">Biometrics</h5>
-        <p class="card-text">Sign up using face recognition</p>
-      </div>
-    </div>
-  </div>
-</div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
 
+                    <div class="card options">
+                        <div class="card-body">
+                            <a @click="passwordAuth" class="card-block stretched-link text-decoration-none">
+                            </a>
+                            <i class="fas fa-key fa-4x "></i>
+                            <h5 class="card-title">Master Password</h5>
+                            <p class="card-text">Sign up using a master password</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card options">
+                        <div class="card-body">
+                            <a @click="faceAuth" class="card-block stretched-link text-decoration-none">
+                            </a>
+                            <i class="fas fa-camera fa-4x"></i>
 
-  </div>
-<div v-else-if="passMethod">
-    <div class="row justify-content-center">
-            <form class="col-lg-12" method="POST">
-                                {{form.hidden_tag()}}
-
-            <div class="form-group">
-            <label>Username</label><br>
-
-                    {{form.username(type="text" ,class_="form-control input_cred",placeholder="Insert your username here", **{'v-model':'username'})}}
-
+                            <h5 class="card-title">Biometrics</h5>
+                            <p class="card-text">Sign up using face recognition</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-            <label>Master Password </label><br>
-            {{form.password(type="password",class_="form-control input_cred",placeholder="Insert your password here", **{'v-model':'password'})}}
-            </div>
-                  <div class="form-group">
-            <label>Re-enter Master Password </label><br>
-                      <input :style="checkReEnterPasswordField" :disabled="!password.length > 0" type="password" id="confirmPassword" class="form-control input_cred" placeholder="Re-enter your password here" v-model="reEnteredPassword">
-                      <small style="color: red" v-if="password !== reEnteredPassword && password.length > 0">Passwords do not match</small>
-                      <small v-if="password === reEnteredPassword && reEnteredPassword.length >0 " style="color: green">Passwords match</small>
 
-            </div>
-             <div class="form-group">
-                        <input type="checkbox" onclick="toggleVisibility(document.getElementById('password')); toggleVisibility(document.getElementById('confirmPassword'))">
+
+        </div>
+        <div v-else-if="passMethod">
+            <div class="row justify-content-center">
+                <form class="col-lg-12" method="POST">
+                    {{form.hidden_tag()}}
+
+                    <div class="form-group">
+                        <label>Username</label><br>
+
+                        {{form.username(type="text" ,class_="form-control input_cred",placeholder="Insert your username here", **{'v-model':'username'})}}
+
+                    </div>
+                    <div class="form-group">
+                        <label>Master Password </label><br>
+                        {{form.password(type="password",class_="form-control input_cred",placeholder="Insert your password here", **{'v-model':'password'})}}
+                    </div>
+                    <div class="form-group">
+                        <label>Re-enter Master Password </label><br>
+                        <input :disabled="!password.length > 0" :style="checkReEnterPasswordField" class="form-control input_cred"
+                               id="confirmPassword" placeholder="Re-enter your password here"
+                               type="password" v-model="reEnteredPassword">
+                        <small style="color: red" v-if="password !== reEnteredPassword && password.length > 0">Passwords
+                            do not match</small>
+                        <small style="color: green"
+                               v-if="password === reEnteredPassword && reEnteredPassword.length >0 ">Passwords match</small>
+
+                    </div>
+                    <div class="form-group">
+                        <input onclick="toggleVisibility(document.getElementById('password')); toggleVisibility(document.getElementById('confirmPassword'))"
+                               type="checkbox">
                         <label>Show password</label>
-             </div>
+                    </div>
 
 
+                    <button :disabled="canSign" class="btn btn-primary btn-lg btn-block" type="submit">
+                        Sign up <i class="fas fa-user-plus"></i></button>
 
-            <button type="submit" class="btn btn-primary btn-lg btn-block" :disabled="canSign">
- Sign up  <i class="fas fa-user-plus"></i></button>
-
-            </form>
-
-        </div>
-
-    <div class="float-left" style="margin-top: 10px">
-      <button type="button" class="btn btn-secondary" @click="passwordAuth"><i data-toggle="tooltip" data-placement="bottom" title="Sign in using face recognition instead" class="fas fa-chevron-circle-left"></i>
-</button>
-        </div>
-
-
-</div>
-
-    <div v-else-if="faceMethod">
-    <div class="row justify-content-center">
-            <form class="col-lg-12">
-            <div class="form-group">
-            <img src="https://dummyimage.com/200x200/000/fff.jpg" alt="..." class="img-thumbnail mx-auto d-block">
+                </form>
 
             </div>
 
-            <div class="form-group form-check " id="remember_me_check">
-            <input type="checkbox" class="form-check-input" >
-            <label class="form-check-label" for="exampleCheck1" >Remember Me</label>
+            <div class="float-left" style="margin-top: 10px">
+                <button @click="passwordAuth" class="btn btn-secondary" id="backButton" type="button"><i
+                        class="fas fa-chevron-circle-left"></i>
+                </button>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-sign-in-alt"></i>
- Sign in</button>
 
-            </form>
 
         </div>
 
-     <div class="float-left" style="margin-top: 10px">
-      <button type="button" class="btn btn-secondary" @click="faceAuth"><i data-toggle="tooltip" data-placement="bottom" title="Sign in using face recognition instead" class="fas fa-user-plus"></i>
-</button>
+        <div v-else-if="faceMethod">
+            <div class="row justify-content-center">
+                <form class="col-lg-12">
+                    <div class="form-group">
+                        <img alt="..." class="img-thumbnail mx-auto d-block"
+                             src="https://dummyimage.com/200x200/000/fff.jpg">
+
+                    </div>
+
+                    <div class="form-group form-check " id="remember_me_check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label">Remember Me</label>
+                    </div>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>
+                        Sign in
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="float-left" style="margin-top: 10px">
+                <button @click="faceAuth" class="btn btn-secondary" type="button"><i
+                        class="fas fa-user-plus"></i>
+                </button>
+            </div>
+
+
         </div>
 
 
-</div>
+    </div>
+    <div class="signup-footer row justify-content-center">
+        <a href="/login">Login?</a>
+    </div>
 
+    {%endblock%}
 
-</div>
-      <div class="signup-footer row justify-content-center">
-      <a href="/login">Login?</a>
-  </div>
+    {%block scripts%}
 
-{%endblock%}
-
-{%block scripts%}
-    <script src="../static/js/vue.js"></script>
     <script>
         var app = new Vue({
             el: '#signup',
@@ -135,51 +143,51 @@
                 lastState: 0
 
             },
-            mounted(){
+            mounted() {
                 getNotifications()
-                window.onpopstate = function(event) {
-                  if(event.state === 1 || event.state === 2){
-                      this.reset()
-                      this.lastState = event.state
-                  }
+                window.onpopstate = function (event) {
+                    if (event.state === 1 || event.state === 2) {
+                        this.reset()
+                        this.lastState = event.state
+
+                    }
 
                 }.bind(this);
 
-            },
-            beforeDestroy () {
 
             },
-            methods:{
-                passwordAuth: function (event){
-                 this.passMethod = ! this.passMethod
-                  history.pushState( 1, 'password' )
+
+            methods: {
+                passwordAuth: function () {
+                    this.passMethod = !this.passMethod
+                    history.pushState(1, 'password')
                 },
-                faceAuth: function (event){
-                 this.faceMethod = ! this.faceMethod
-                 history.pushState( 2, 'face' )
+                faceAuth: function () {
+                    this.faceMethod = !this.faceMethod
+                    history.pushState(2, 'face')
                 },
-                reset: function (){
-                      this.faceMethod = false;
-                      this.passMethod = false
+                reset: function () {
+                    this.faceMethod = false;
+                    this.passMethod = false
                 }
 
             },
-            computed:{
-                 canSign: function (){
+            computed: {
+                canSign: function () {
                     return !(this.username.length > 0 && this.password.length > 0 && this.password === this.reEnteredPassword)
                 },
-                checkReEnterPasswordField: function (){
-                     if (this.password.length > 0 && this.password === this.reEnteredPassword){
+                checkReEnterPasswordField: function () {
+                    if (this.password.length > 0 && this.password === this.reEnteredPassword) {
                         return {"borderColor": "green"}
-                     }else if(this.password.length ==0)
-                         return {}
-                     else{
-                         return {"borderColor": "red"}
-                     }
+                    } else if (this.password.length == 0)
+                        return {}
+                    else {
+                        return {"borderColor": "red"}
+                    }
 
                 }
             },
             delimiters: ['[[', ']]']
         })
     </script>
-{%endblock%}
+    {%endblock%}

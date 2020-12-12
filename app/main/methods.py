@@ -132,13 +132,3 @@ def deleteAccount(user_id):
 def getNumberOfAccounts():
     return mongo.db.users.count()
 
-@login_manager.user_loader
-def load_user(id):
-    from .Account import Account
-    user = getAccountById(id)
-    if user is None: #if the user has been deleted from another device
-        flash("This account does not exist anymore.","info")
-        resp = make_response(redirect("/"))
-        resp.set_cookie('id', expires=0)
-    else:
-        return Account.load_account(user)

@@ -15,12 +15,9 @@
 }
 
 @font-face {
-  font-family: 'OCR A Extended V2';
-  src: url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.svg') format('svg'); /* Legacy iOS */
+    font-family: 'OCR A Extended V2';
+    src: url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.woff') format('woff'), /* Modern Browsers */ url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.ttf') format('truetype'), /* Safari, Android, iOS */ url('../fonts/OCR A Extended V2/OCR_A_Extended_V2.svg') format('svg'); /* Legacy iOS */
 }
 
 /*!
@@ -61,7 +58,7 @@
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --breakpoint-xlg: 1600px;
-    --font-family-sans-serif:  "Rubik", sans-serif;
+    --font-family-sans-serif: "Rubik", sans-serif;
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -16537,7 +16534,7 @@ html body .waves-notransition {
     text-align: center;
 }
 
-.icon:hover{
+.icon:hover {
     transform: scale(1.1);
 }
 
@@ -16548,11 +16545,8 @@ html body .waves-notransition {
     display: inline-block;
     box-sizing: border-box;
     border-width: 0.5px;
-    border-color: rgb(47,50,62);
+    border-color: rgb(47, 50, 62);
 }
-
-
-
 
 
 .input_cred {
@@ -16601,18 +16595,17 @@ html body .waves-notransition {
 }
 
 
-
-
-#login{
-    background-color: rgb(237,241,245);
+#login {
+    background-color: rgb(237, 241, 245);
 }
-#signup{
-    background-color: rgb(237,241,245);
+
+#signup {
+    background-color: rgb(237, 241, 245);
 }
 
 
 html {
-    background-color: rgb(237,241,245) !important;
+    background-color: rgb(237, 241, 245) !important;
 }
 
 .signup-footer a {
@@ -16628,98 +16621,122 @@ html {
     font-weight: bold;
 }
 
-.version-pill{
-    font-size:16px
+.version-pill {
+    font-size: 16px
 }
 
-.version-back-button a{
+.version-back-button a {
     color: white;
 }
 
-.footer{
-    background-color: rgb(237,241,245);
+.footer {
+    background-color: rgb(237, 241, 245);
 }
 
-.password-card{
-    background-color: rgb(47,50,62);
+.password-card {
+    background-color: rgb(47, 50, 62);
     border-radius: 12px;
 }
 
-.password-card:hover{
-     transform: scale(1.01);
-    border-color: rgb(112,124,210);
+.password-card:hover {
+    transform: scale(1.01);
+    border-color: rgb(112, 124, 210);
     border-width: 4px;
 }
 
 #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5], #main-wrapper[data-layout=horizontal] .left-sidebar[data-sidebarbg=skin5] ul, #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5], #main-wrapper[data-layout=vertical] .left-sidebar[data-sidebarbg=skin5] ul {
-    background: rgb(47,50,62);
+    background: rgb(47, 50, 62);
 }
 
-.validURL{
+.validURL {
     color: white;
 }
 
-.validURL:hover{
+.validURL:hover {
     font-size: 20px;
     color: white;
 }
 
 
-.show-password{
+.show-password {
     filter: blur(5px);
     margin: 10px;
 }
 
-.show-password-area{
+.show-password-area {
     border-width: 0.3px;
     border-color: black;
     border-style: dashed;
 }
 
-.show-password:hover{
+.show-password:hover {
     filter: blur(0px);
     border-style: hidden;
 }
 
-.card-buttons{
+.card-buttons {
     font-size: 17px;
     margin: 5px;
 }
 
 
-.edit-button{
+.edit-button {
     color: white;
     font-size: 18px;
 }
-.edit-button:hover{
+
+.edit-button:hover {
     transform: scale(1.1);
-    color: rgb(112,124,210);
+    color: rgb(112, 124, 210);
 }
 
 
-.navbar-brand{
-    background-color: rgb(237,241,245) !important;
+.navbar-brand {
+    background-color: rgb(237, 241, 245) !important;
 }
 
-.confirm-delete-button{
+.confirm-delete-button {
     border-width: 2px;
     border-style: solid;
 }
 
-.introduction{
+.introduction {
     font-family: "OCR A Extended V2";
-    background-color: rgb(237,241,245);
-    margin:10px;
+    background-color: rgb(237, 241, 245);
+    margin: 10px;
     padding: 0;
-    }
+}
 
-.page-wrapper-noNav{
-        background-color: rgb(237,241,245);
+.page-wrapper-noNav {
+    background-color: rgb(237, 241, 245);
 
 }
 
-.page-wrapper{
-        background-color: rgb(237,241,245);
+.page-wrapper {
+    background-color: rgb(237, 241, 245);
 
 }
 
+.footer-text a {
+    font-family: "OCR A Extended V2";
+    color: rgb(112, 124, 210);
+}
+
+.footer-text a:hover {
+    color: rgb(47, 50, 62);
+    font-size: 110%;
+    text-transform: uppercase;
+}
+
+.get-started-button {
+    font-family: "OCR A Extended V2";
+}
+
+.get-started-button:hover {
+    font-size: 140%;
+}
+
+.profile-icon{
+    font-size: 20px;
+    margin-right: 2px;
+}

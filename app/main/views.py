@@ -1,13 +1,13 @@
 from datetime import datetime
 from flask import render_template, session, redirect, url_for, request, flash, abort, current_app
+from flask_login import login_user, login_required, logout_user, fresh_login_required, current_user
 from is_safe_url import is_safe_url
 from .forms import AddPasswordField, Login, Signup
 from .Password import Password
+from .Account import Account
 from collections import deque
 from . import main
 from .methods import *
-from flask_login import login_user, login_required, logout_user, fresh_login_required, current_user
-from .Account import Account
 from . import error_views
 
 
@@ -127,7 +127,6 @@ def deleteProfile():
         user = current_user
         deleteAccount(user._id)
         logout_user()
-        flash("Your account have been deleted", "success")
         return redirect("/")
 
 
@@ -197,3 +196,13 @@ def logout():
     logout_user()
     flash("You have been logged out", "info")
     return redirect("/login")
+
+@login_manager.user_loader
+def load_user(id):
+    user = getAccountById(id)
+    if user is None: #if the user has been deleted from another device
+        flash("This account does not exist anymore.","info")
+        expire_cookie = make_response(redirect("/version/about"))
+        expire_cookie.set_cookie('id', expires=0)
+    else:
+        return Account.load_account(user)

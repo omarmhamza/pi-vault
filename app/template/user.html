@@ -97,11 +97,16 @@
                           <div class="form-group mb-4">
                             <label class="col-md-12 p-0">Re-enter Master password</label>
                             <div class="col-md-12 border-bottom p-0">
-                                <input :disabled="! password" v-model="reEnterPassword" class="form-control p-0 border-0" placeholder="Re-enter your new Master password here">
-                                <small class="text-danger" v-model="matchNotify">[[error]]</small>
+                                <input type="password" :disabled="! password" v-model="reEnterPassword" id="confirmPassword" class="form-control p-0 border-0" placeholder="Re-enter your new Master password here">
+                                <small class="text-danger">[[error]]</small>
                             </div>
 
                         </div>
+                                <div class="form-group">
+                        <input type="checkbox" onclick="toggleVisibility(document.getElementById('password')); toggleVisibility(document.getElementById('confirmPassword'))">
+                        <label>Show password</label>
+             </div>
+
                         {%endif%}
                         <div class="form-group mb-4">
                             <div class="col-lg-12">
@@ -140,7 +145,7 @@
 {%endblock%}
 
 {%block scripts%}
-<script src="../static/js/vue.js"></script>
+
 
 <script>
 
@@ -153,6 +158,9 @@
             password: '',
             reEnterPassword: '',
             error : ''
+          },
+          mounted(){
+            window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
           },
           computed: {
               confirmDelete : function (){
@@ -169,20 +177,18 @@
                   }
               },
 
-              matchNotify: function (){
-                if (this.password !== this.reEnterPassword){
-                    this.error = "Passwords do not match"
-                }else{
-                    this.error = ""
-                }
-              },
 
               canUpdate: function (){
-
-                  if(this.password.length >0 && this.username && this.reEnterPassword.length > 0 && this.password === this.reEnterPassword)
+                  if(this.password.length >0 && this.username && this.reEnterPassword.length > 0 && this.password === this.reEnterPassword){
+                      this.error = ""
                       return true
-                  return false
+                  }
+                  else{
+                      if(this.password) this.error = "Passwords do not match"
+                      return false
+                  }
               }
+
 
           },
         delimiters: ['[[', ']]']

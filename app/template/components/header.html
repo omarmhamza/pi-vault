@@ -4,7 +4,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" href="/version/about">
                         <!-- Logo icon -->
                         <b class="logo-text">
                             <!-- Dark Logo icon -->
@@ -52,9 +52,11 @@
                                 {%if user.authentication.face_method%}
                                 <img src="/static/plugins/images/users/varun.jpg" alt="user-img" width="36"
                                     class="img-circle">
-
+                                {%else%}
+                                <i class="fas fa-user-circle profile-icon" ></i>
                                 {%endif%}
-                                <span class="text-white font-bold">{{user.username}}</span></a>
+                                <span class="text-white font-bold">{{user.username}}</span>
+                            </a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->

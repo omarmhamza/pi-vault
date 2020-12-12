@@ -3,8 +3,6 @@ from . import version
 import psutil
 import platform
 import requests
-from app import mongo
-from app import login_manager
 from flask_login import fresh_login_required, current_user
 
 
