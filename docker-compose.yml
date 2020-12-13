@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  database:
+    container_name: "mongodb_database"
+    image: bitnami/mongodb:4.2
+    restart: always
+    ports:
+      - "27019:27017"
+    environment:
+      - MONGODB_USERNAME=root
+      - MONGODB_PASSWORD=pbOq7vUL4t4fZ5HZaIGiCAtRZJtxywkp
+      - MONGODB_DATABASE=vault
+    volumes:
+      - ./.docker/mongodb:/bitnami/mongodb
+
+  app:
+    container_name: "pi-vault-app"
+    build:
+      context: .
+    ports:
+      - "80:5000"
+    restart: always
+    environment:
+      FLASK_ENV: "production"
+      MONGO_URI: "mongodb://root:pbOq7vUL4t4fZ5HZaIGiCAtRZJtxywkp@database:27017/vault"
+      SECRET_KEY: "qCGX2QaaS3wMTMJ0eRCsM13v9Nc2mlZ1"
+    depends_on:
+      - database
+
+volumes:
+  mongodb_data_container:
