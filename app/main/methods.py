@@ -30,7 +30,6 @@ def getIcons():
 
 
 def getIconFromList(value):
-    print(value)
     icon_selected = str(value.pop()).strip("&#x")
     icon = mongo.db.icons.find_one({"unicode": icon_selected})
     return icon
@@ -143,7 +142,6 @@ def validateAccount(username):
 
 def deleteAccount(user_id):
     search = mongo.db.users.delete_one({"_id": "{}".format(user_id)})
-    print(search)
 
 
 def getNumberOfAccounts():

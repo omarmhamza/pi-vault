@@ -1,24 +1,29 @@
+import os
 import sys
-sys.path.insert(0, '..')
+
+
 import json
 from pymongo import MongoClient
-from flasky import ENV
-from config import config
+# from flasky import ENV
+# from config import config
 
 
-uri = config[ENV].MONGO_URI
+uri = "mongodb://root:pbOq7vUL4t4fZ5HZaIGiCAtRZJtxywkp@127.0.0.1:27019/vault"
 
 if uri:
     print("Starting Migration")	
     client = MongoClient(uri)
     db = client["vault"]
-    Collection = db["icons"]
-    with open("icons.json") as icons_file:
-        data = json.load(icons_file)
-    if isinstance(data, list):
-        Collection.insert_many(data)
+    if "icons" not in db.list_collection_names():
+        Collection = db["icons"]
+        with open("install/icons.json") as icons_file:
+            data = json.load(icons_file)
+        if isinstance(data, list):
+            Collection.insert_many(data)
+        else:
+            Collection.insert_one(data)
+        print("Done")
     else:
-        Collection.insert_one(data)
-    print("Done")
+        print("icons collection already exists")
 else:
     print("Connection to the database has failed, check your configuration!") 
