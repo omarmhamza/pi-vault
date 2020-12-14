@@ -2,3 +2,8 @@ server.sock
 venv
 assets
 start.sh
+docker-compose.yml
+Dockerfile
+.docker
+install
+scripts

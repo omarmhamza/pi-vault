@@ -1,4 +1,6 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.8
+FROM dullage/gunicorn:20.0-python3.8
+WORKDIR pi-vault
 COPY . .
-RUN cd install; ./install.sh;
-ENTRYPOINT uwsgi --socket 0.0.0.0:5000 --protocol=http -w flasky:app --ini server.ini
+RUN pip install -r requirements.txt
+EXPOSE 5000
+ENTRYPOINT gunicorn -w 4 --bind 0.0.0.0:5000 flasky:app
