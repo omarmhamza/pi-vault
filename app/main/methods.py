@@ -15,8 +15,9 @@ def checkDbConnection(func):
             function = func(*args, **kwargs)
             return function
         except pymongo.errors.ServerSelectionTimeoutError:
-            flash("DB connection error", "error")
+            flash("Database connection error", "error")
             return redirect("/version/about")
+
     return exception
 
 
@@ -79,24 +80,27 @@ def updatePassword(account_id, pass_id, password):
         "passwords.$.{}.validURL".format(pass_id): password["validURL"],
 
     }
-    mongo.db.users.update(
+    update_state = mongo.db.users.update(
         {"_id": "{}".format(account_id), "passwords.{}".format(pass_id): {"$exists": "true"}},
         {'$set': updated_values}
     )
+    return update_state["nModified"]
 
 
 def deletePassword(account_id, pass_id):
-    mongo.db.users.update(
+    set_values_to_null = mongo.db.users.update(
         {"_id": "{}".format(account_id), "passwords.{}".format(pass_id): {"$exists": "true"}},
         {"$unset": {"passwords.$": {"$exists": "true"}}}
     )
-    mongo.db.users.update(
+    delete_null = mongo.db.users.update(
         {"_id": "{}".format(account_id)},
         {
             "$inc": {"total_passwords": -1},
             "$pull": {"passwords": None}
         }
+
     )
+    return set_values_to_null["nModified"] or delete_null["nModified"]
 
 
 def addAccount(account):
@@ -104,7 +108,7 @@ def addAccount(account):
 
 
 def updateCredentials(user_id, username, password):
-    mongo.db.users.update(
+    update_account = mongo.db.users.update(
         {"_id": "{}".format(user_id)},
         {"$set": {
             "username": str(username),
@@ -112,6 +116,8 @@ def updateCredentials(user_id, username, password):
         }
         }
     )
+    return update_account["nModified"]
+
 
 
 def checkAvailability(username):
@@ -141,7 +147,7 @@ def validateAccount(username):
 
 
 def deleteAccount(user_id):
-    search = mongo.db.users.delete_one({"_id": "{}".format(user_id)})
+    mongo.db.users.delete_one({"_id": "{}".format(user_id)})
 
 
 def getNumberOfAccounts():

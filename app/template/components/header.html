@@ -1,67 +1,66 @@
-        <header class="topbar" data-navbarbg="skin6">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="/version/about">
-                        <!-- Logo icon -->
-                        <b class="logo-text">
-                            <!-- Dark Logo icon -->
-                            <img src="/static/plugins/images/logo1.png" alt="homepage" width="180" height="45"  />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
+<header class="topbar" data-navbarbg="skin6">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <div class="navbar-header" data-logobg="skin6">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <a class="navbar-brand" href="/version/about">
+                <!-- Logo icon -->
+                <b class="logo-text">
+                    <!-- Dark Logo icon -->
+                    <img src="/static/plugins/images/logo1.png" alt="homepage" width="180" height="45"/>
+                </b>
+                <!--End Logo icon -->
+                <!-- Logo text -->
 
+            </a>
+
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+               href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+            <ul class="navbar-nav d-none d-md-block d-lg-none">
+                <li class="nav-item">
+                    <a class="nav-toggler nav-link waves-effect waves-light text-white"
+                       href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </li>
+            </ul>
+            <!-- ============================================================== -->
+            <!-- Right side toggle and nav items -->
+            <!-- ============================================================== -->
+
+
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+
+                <!-- ============================================================== -->
+                <!-- User profile and search -->
+                <!-- ============================================================== -->
+
+                <li>
+                    <a class="profile-pic" href="/profile">
+                        {%if user.authentication.face_method%}
+                        <img src="/static/plugins/images/users/varun.jpg" alt="user-img" width="36"
+                             class="img-circle">
+                        {%else%}
+                        <i class="fas fa-user-circle profile-icon"></i>
+                        {%endif%}
+                        <span class="text-white font-bold">{{user.username}}</span>
                     </a>
-
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-
-                </div>
+                </li>
                 <!-- ============================================================== -->
-                <!-- End Logo -->
+                <!-- User profile and search -->
                 <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav d-none d-md-block d-lg-none">
-                        <li class="nav-item">
-                            <a class="nav-toggler nav-link waves-effect waves-light text-white"
-                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                        </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-
-
-
-                    <ul class="navbar-nav ml-auto d-flex align-items-center">
-
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-
-                        <li>
-                            <a class="profile-pic" href="/profile">
-                                {%if user.authentication.face_method%}
-                                <img src="/static/plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle">
-                                {%else%}
-                                <i class="fas fa-user-circle profile-icon" ></i>
-                                {%endif%}
-                                <span class="text-white font-bold">{{user.username}}</span>
-                            </a>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
-        </header>
+            </ul>
+        </div>
+    </nav>
+</header>

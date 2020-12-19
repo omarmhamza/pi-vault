@@ -195,13 +195,14 @@ sup {
 }
 
 a {
-    color: #707cd2;
+    color: rgb(112,124,210);
     text-decoration: none;
     background-color: transparent;
+    font-size: 18px;
 }
 
 a:hover {
-    color: #3b4abb;
+    color: black;
     text-decoration: none;
 }
 
@@ -14292,7 +14293,7 @@ html[dir="ltr"] body .p-l-0 {
 
 #main-wrapper[data-layout="horizontal"] .topbar .top-navbar .navbar-header[data-logobg="skin6"],
 #main-wrapper[data-layout="vertical"] .topbar .top-navbar .navbar-header[data-logobg="skin6"] {
-    background: #fff;
+    background: rgb(237,241,245);
 }
 
 #main-wrapper[data-layout="horizontal"] .topbar .navbar-collapse[data-navbarbg="skin6"],
@@ -14526,12 +14527,15 @@ html {
 }
 
 a {
-    color: #2cabe3;
+    color: rgb(111,123,210);
+    /*font-size: 18px;*/
+    /*font-weight: bold;*/
 }
 
 a:focus,
 a:hover {
     text-decoration: none;
+    /*color: black;*/
 }
 
 a.link {
@@ -14540,7 +14544,7 @@ a.link {
 
 a.link:focus,
 a.link:hover {
-    color: #2cabe3;
+    color: black;
 }
 
 .box {
@@ -16528,7 +16532,7 @@ html body .waves-notransition {
 }
 
 .icon {
-    padding: 23px;
+    padding: 24px;
     color: rgb(84, 102, 122);
     min-width: 0px;
     text-align: center;
@@ -16724,7 +16728,6 @@ html {
 
 .footer-text a:hover {
     color: rgb(47, 50, 62);
-    font-size: 110%;
     text-transform: uppercase;
 }
 

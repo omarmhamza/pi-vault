@@ -4,6 +4,8 @@ assets
 server.sock
 secret.key
 .docker
+server.ini
+.idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

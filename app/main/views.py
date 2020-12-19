@@ -96,8 +96,10 @@ def edit(id):
                 "encrypted": Encryption.encrypt(form.password.data),
                 "modified": str(date),
             }
-            updatePassword(session['id'], id, password)
-            flash("Successfully edited password", "info")
+            if updatePassword(session['id'], id, password):
+                flash("Successfully edited password", "info")
+            else:
+                flash("Something wrong occurred","error")
             return redirect("/")
         return render_template("edit.html", icons=getIcons(), form=form, password=getPassword(session['id'], str(id)),
                                id=id, user=user)
@@ -107,8 +109,10 @@ def edit(id):
 @checkDbConnection
 @login_required
 def delete(id):
-    deletePassword(session['id'], id)
-    flash("Deleted password", "success")
+    if deletePassword(session['id'], id):
+        flash("Deleted password", "success")
+    else:
+        flash("Something wrong occurred","error")
     return redirect("/")
 
 
@@ -123,8 +127,10 @@ def profile():
         form = Login()
         if form.is_submitted() and form.validate_on_submit():
             if checkAvailability(form.username):
-                updateCredentials(user._id, form.username.data, form.password.data)
-                flash("Updated credentials", "success")
+                if updateCredentials(user._id, form.username.data, form.password.data):
+                    flash("Updated credentials", "success")
+                else:
+                    flash("Something wrong occurred","error")
                 return redirect("/profile")
             else:
                 flash("This username is taken, please try another one.", "error")

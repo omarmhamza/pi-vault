@@ -8,7 +8,7 @@
     {%include "components/notification_messages.html" %}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Delete account confirmation</h5>
@@ -20,8 +20,7 @@
 
       <div class="modal-body text-center">
           <p class="text-center">To confirm please type <b style="font-size: 15px">{{user.username}}</b> below</p>
-          <input type="text" class="text-center confirm-delete-button" placeholder={{user.username}} :value="confirmUser" @input="e => confirmUser = e.target.value"
- :style="confirmDeleteFieldColor" id="confirmDelete">
+          <input type="text" class="text-center confirm-delete-button" placeholder={{user.username}} :value="confirmUser" @input="e => confirmUser = e.target.value" :style="confirmDeleteFieldColor" id="confirmDelete">
                                     <br><small class="text-danger">This action is irreversible</small>
 
       </div>
@@ -58,6 +57,7 @@
                                                               class="thumb-lg img-circle" alt="img"></a>
                             {%endif%}
                             <h4 class="text-white mt-2">{{user.username}}</h4>
+                            <input type="hidden" id="usernameInput" value="{{user.username}}">
                             <h5 class="text-white mt-2">Created on: {{user.created}}</h5>
                         </div>
                     </div>
@@ -147,52 +147,6 @@
 {%block scripts%}
 
 
-<script>
+    <script src="/static/js/pages/profile/user.js"></script>
 
-    window.onload = getNotifications;
-      var app = new Vue({
-          el: '#profile',
-          data: {
-            confirmUser: '',
-            username : "{{user.username | safe}}",
-            password: '',
-            reEnterPassword: '',
-            error : ''
-          },
-          mounted(){
-            window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
-          },
-          computed: {
-              confirmDelete : function (){
-                  if (this.confirmUser.trim() === this.username)
-                      return true
-                  else return false
-              },
-
-              confirmDeleteFieldColor: function (){
-                  if(this.confirmDelete){
-                      return {"border-color": "green"}
-                  }else{
-                      return {"border-color": "red"}
-                  }
-              },
-
-
-              canUpdate: function (){
-                  if(this.password.length >0 && this.username && this.reEnterPassword.length > 0 && this.password === this.reEnterPassword){
-                      this.error = ""
-                      return true
-                  }
-                  else{
-                      if(this.password) this.error = "Passwords do not match"
-                      return false
-                  }
-              }
-
-
-          },
-        delimiters: ['[[', ']]']
-      })
-
-</script>
 {%endblock%}

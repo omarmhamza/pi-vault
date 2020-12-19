@@ -20,8 +20,7 @@ services:
 
   app:
     container_name: "pi-vault-app"
-    build:
-      context: .
+    image: "pi-vault:latest"
     ports:
       - "80:5000"
     restart: always

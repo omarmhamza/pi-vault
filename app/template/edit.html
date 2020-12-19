@@ -1,115 +1,117 @@
 {%extends "components/skeleton.html" %}
 
 {%block content %}
-        <div class="container-fluid">
-                                    <!-- Modal -->
-                        <div aria-hidden="true" aria-labelledby="deleteConfirmation" class="modal fade" id="deleteConfirmation"
-                             role="dialog" tabindex="-1">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete
-                                            this password?</h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        This action is irreversible
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close
-                                        </button>
-                                       <a href="/passwords/delete/{{id}}"> <button class="btn btn-danger" type="button"><i class="fas fa-trash-alt"></i>
-                                            Delete
-                                        </button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
-            {%include "components/notification_messages.html" %}
-            <form method="POST">
-                {{form.hidden_tag()}}
-                <div class="row">
-
-                    <div class="col password-page">
-                        <h2 class="text-center">Edit Password</h2>
-                        <div class="log">
-                            <span class="badge badge-pill badge-primary">Created on {{password.created}}</span>
-                            {%if password.modified %}
-                            <span class="badge badge-pill badge-info">Modified on {{password.modified}}</span>
-                            {%endif%}
-
-                        </div>
-
-
-
-
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            {{form.website(class_="form-control",id="website",placeholder="Website address such as www.pi-hole.com",value=password.website)}}
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="cat">Assign an icon</label>
-
-                            <select class="form-control form-control-lg" name="cat"
-                                    style="font-family: 'Font Awesome\ 5 Brands'">
-                                {%if password.icon.unicode == "f084"%}
-                                <option value="f084" > Not assigned</option>
-                                {%else%}
-                                <option value="{{password.icon.unicode}}" class="cat-icon"> &#x{{ password.icon.unicode | safe }}</option>
-                                {%endif%}
-                                {% for unicode,name in icons %}
-                                <option value="{{unicode}}">{{name}} {{ unicode | safe }} </option>
-                                {% endfor %}
-
-                            </select>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="email">Username</label>
-                            {{form.email(class_="form-control",id="email",placeholder="Email or username associated with the website",value=password.username)}}
-
-                            <!--                            <input type="text" class="form-control" id="exampleInputEmail1"-->
-                            <!--                                   placeholder="Email/username associated with the website">-->
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            {{form.password(class_="form-control",id="password",placeholder="Password",value=password.encrypted)}}
-
-
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" id="exampleCheck1" type="checkbox" onclick="toggleVisibility(document.getElementById('password'))">
-                            <label class="form-check-label" for="exampleCheck1">Show password</label>
-                              <div class="delete-button">
-                        <span  type="button" class="btn btn-md btn-danger" data-toggle="modal"
-                                                    data-target="#deleteConfirmation" data-toggle="tooltip" data-placement="left"
-                                       title="Delete password from vault"><i class="fas fa-trash-alt"></i>
-                        </span>
-                            </div>
-                        </div>
-                        <br>
-
-                        <button class="btn btn-primary btn-lg btn-block" type="submit"><i
-                                class="fas fa-edit"></i> Save
+<div class="container-fluid">
+    <!-- Modal -->
+    <div aria-hidden="true" aria-labelledby="deleteConfirmation" class="modal fade" id="deleteConfirmation"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete
+                        this password?</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    This action is irreversible
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close
+                    </button>
+                    <a href="/passwords/delete/{{id}}">
+                        <button class="btn btn-danger" type="button"><i class="fas fa-trash-alt"></i>
+                            Delete
                         </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    {%include "components/notification_messages.html" %}
+    <form method="POST">
+        {{form.hidden_tag()}}
+        <div class="row">
 
-
-
-                    </div>
+            <div class="col password-page">
+                <h2 class="text-center">Edit Password</h2>
+                <div class="log">
+                    <span class="badge badge-pill badge-primary">Created on {{password.created}}</span>
+                    {%if password.modified %}
+                    <span class="badge badge-pill badge-info">Modified on {{password.modified}}</span>
+                    {%endif%}
 
                 </div>
-            </form>
 
+
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    {{form.website(class_="form-control",id="website",placeholder="Website address such as www.pi-hole.com",value=password.website)}}
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="cat">Assign an icon</label>
+
+                    <select class="form-control form-control-lg" name="cat"
+                            style="font-family: 'Font Awesome\ 5 Brands'">
+                        {%if password.icon.unicode == "f084"%}
+                        <option value="f084"> Not assigned</option>
+                        {%else%}
+                        <option value="{{password.icon.unicode}}" class="cat-icon"> &#x{{ password.icon.unicode | safe }}
+                        </option>
+                        {%endif%}
+                        {% for unicode,name in icons %}
+                        <option value="{{unicode}}">{{name}} {{ unicode | safe }}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Username</label>
+                    {{form.email(class_="form-control",id="email",placeholder="Email or username associated with the
+                    website",value=password.username)}}
+
+                    <!--                            <input type="text" class="form-control" id="exampleInputEmail1"-->
+                    <!--                                   placeholder="Email/username associated with the website">-->
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    {{form.password(class_="form-control",id="password",placeholder="Password",value=password.encrypted)}}
+
+
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="exampleCheck1" type="checkbox"
+                           onclick="toggleVisibility(document.getElementById('password'))">
+                    <label class="form-check-label" for="exampleCheck1">Show password</label>
+                    <div class="delete-button">
+                        <span type="button" class="btn btn-md btn-danger" data-toggle="modal"
+                              data-target="#deleteConfirmation" data-toggle="tooltip" data-placement="left"
+                              title="Delete password from vault"><i class="fas fa-trash-alt"></i>
+                        </span>
+                    </div>
+                </div>
+                <br>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit"><i
+                        class="fas fa-edit"></i> Save
+                </button>
+
+
+            </div>
 
         </div>
+    </form>
+
+
+</div>
 
 {%endblock%}
