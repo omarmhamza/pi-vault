@@ -12,7 +12,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: "pbOq7vUL4t4fZ5HZaIGiCAtRZJtxywkp"
       MONGO_INITDB_DATABASE: "vault"
     volumes:
-      - ./.docker/mongodb:/data/db
+      -  /usr/share/pivault/mongodb:/data/db
       - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./scripts/insert_icons.sh:/docker-entrypoint-initdb.d/insert_icons.sh:ro
       - ./install/icons.json:/docker-entrypoint-initdb.d/icons.json:ro
@@ -20,13 +20,13 @@ services:
 
   app:
     container_name: "pi-vault-app"
-    image: "pi-vault:latest"
+    image: omarmhamza/pi-vault:arm64v8 #use "omarmhamza/pi-vault:latest" for amd64 cpu arch
     ports:
       - "80:5000"
     restart: always
     environment:
       FLASK_ENV: "production"
-      MONGO_URI: "mongodb://user:password@database:27017/vault"
+      MONGO_URI: "mongodb://user:Pl6VuTfrqY@database:27017/vault"
       SECRET_KEY: "qCGX2QaaS3wMTMJ0eRCsM13v9Nc2mlZ1"
     depends_on:
       - database
