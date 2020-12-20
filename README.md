@@ -14,7 +14,7 @@
   <img  src="https://i.ibb.co/FY5FnFK/ezgif-com-gif-maker.gif ">
 </p>
 
-<h2>pi-vault is a web based software for the Raspberry Pi, it is used to store your sensitive data such as passwords in an encrypted manner. The web interface allows you to create accounts and store online credientials such as emails,usernames and passwords</h2>
+<h2>pi-vault is a web based software for the Raspberry Pi, it is used to store your sensitive data such as passwords in an encrypted manner. The web interface allows you to create accounts and store online credentials such as emails,usernames and passwords</h2>
 
 
 <br>
