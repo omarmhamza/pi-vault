@@ -1,5 +1,5 @@
 # pi-vault
-![alt text](https://i.ibb.co/PgHbpRD/logo1.png "pi-vault logo")
+![alt text](https://i.ibb.co/SNMFNFg/pivault.png "pi-vault logo")
 <h2>
 pi-vault is a web based software for the Raspberry Pi, it is used to store your sensitive data such as passwords in an encrypted manner. The web interface allows you to create accounts and store online credientials such as emails,usernames and passwords</h2>
 <br>
@@ -173,9 +173,35 @@ How your account and password details will look like:
     ⭕ Add login using face recoginiton.
     ⭕ Optimize secuirty policies and implement https protocol
 
-## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+<br> 
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+# Credits & Contributors 
+
+- [Omar Hamza](https://github.com/omarmhamza) - Initial Work
+- [WrapPixel - Ample Admin](https://www.wrappixel.com/demos/admin-templates/ampleadmin/ample-admin-lite/) - Lite Bootstrap Theme
+
+
+# MIT License
+
+
+Copyright (c) 2020 Omar Hamza
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
