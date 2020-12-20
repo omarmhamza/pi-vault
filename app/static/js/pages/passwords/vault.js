@@ -1,4 +1,5 @@
 
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -6,7 +7,8 @@ var app = new Vue({
         selected_website: '',
         selected_password: '',
         url: '',
-        passwords: data
+        passwords: data,
+
 
     },
     mounted() {
@@ -29,18 +31,10 @@ var app = new Vue({
 
         },
         copyPassword: function (event) {
-
             var clipboard = new ClipboardJS('.copyTrigger', {
                 container: document.getElementById('showPasswordModel')
             });
-            clipboard.on('success', function (e) {
-                toastr.success('Copied to clipboard')
-                e.clearSelection();
-            });
-            clipboard.on('error', function (e) {
-                toastr.error('Failed to copy')
-            });
-
+            toastr.success('Copied to clipboard')
         },
 
         searchPasswords: function (event) {

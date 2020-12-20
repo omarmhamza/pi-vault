@@ -1,4 +1,5 @@
 echo "Starting Installation"
 pip install -r ../requirements.txt
-python ../scripts/create_key.py
+python create_key.py
+python migrate.py
 echo "Installation Successful"

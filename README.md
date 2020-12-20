@@ -1,5 +1,10 @@
 # pi-vault
-![alt text](https://i.ibb.co/SNMFNFg/pivault.png "pi-vault logo")
+
+<p align="center">
+  <img width=650  src="https://i.ibb.co/SNMFNFg/pivault.png  ">
+
+</p>
+
 <h2>
 pi-vault is a web based software for the Raspberry Pi, it is used to store your sensitive data such as passwords in an encrypted manner. The web interface allows you to create accounts and store online credientials such as emails,usernames and passwords</h2>
 <br>

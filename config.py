@@ -10,7 +10,6 @@ class Config:
     VUE = "vue.min.js"  # production vue
     USE_SESSION_FOR_NEXT = True
     GITHUB_LINK = "https://github.com/omarmhamza/pi-vault"
-    # context = ('{}/cred/cert.pem'.format(basedir), '{}/cred/key.pem'.format(basedir))  # certificate and key files
 
 
 
@@ -21,13 +20,12 @@ class DevelopmentConfig(Config):
     REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=30)
     DEBUG = True
-    # MONGO_CONNECT_TIMEOUT_MS = 2
-    # MONGO_SOCKET_TIMEOUT_MS = 2
+
 
 class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
     PERMANENT_SESSION_LIFETIME = timedelta(days=1)
-    VUE = "vue.min.js"  # production vue
+    VUE = "vue.min.js"  # production vue version
     MONGO_URI = os.environ.get('MONGO_URI') or "mongodb://localhost:27017/vault"
 
 

@@ -5,5 +5,4 @@ start.sh
 docker-compose.yml
 Dockerfile
 .docker
-install
 scripts

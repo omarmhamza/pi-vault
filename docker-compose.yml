@@ -20,7 +20,7 @@ services:
 
   app:
     container_name: "pi-vault-app"
-    image: omarmhamza/pi-vault:arm64v8 #use "omarmhamza/pi-vault:latest" for amd64 cpu arch
+    image: pi-vault:latest #omarmhamza/pi-vault:arm64v8 #use "omarmhamza/pi-vault:latest" for amd64 cpu arch
     ports:
       - "80:5000"
     restart: always
