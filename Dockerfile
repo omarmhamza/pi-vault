@@ -6,7 +6,6 @@ RUN apk add --no-cache gcc musl-dev python3-dev libffi-dev openssl-dev && \
     pip install --no-cache-dir -r requirements.txt && \
     apk del gcc musl-dev python3-dev libffi-dev openssl-dev
 COPY . .
-RUN python install/create_key.py && rm -r -f install
 EXPOSE 5000
 RUN adduser --disabled-password -hs "user"
 USER user
