@@ -4,13 +4,6 @@
   <img width=650  src="https://i.ibb.co/SNMFNFg/pivault.png  ">
 
 </p>
-
-<h2>
-pi-vault is a web based software for the Raspberry Pi, it is used to store your sensitive data such as passwords in an encrypted manner. The web interface allows you to create accounts and store online credientials such as emails,usernames and passwords</h2>
-<br>
-
-
-
 <p align="center">
 <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/flask">
 <img alt="Docker Image Size (latest by date)" src="https://img.shields.io/docker/image-size/omarmhamza/pi-vault">
@@ -20,6 +13,9 @@ pi-vault is a web based software for the Raspberry Pi, it is used to store your 
 <p align="center">
   <img  src="https://i.ibb.co/FY5FnFK/ezgif-com-gif-maker.gif ">
 </p>
+
+<h2>pi-vault is a web based software for the Raspberry Pi, it is used to store your sensitive data such as passwords in an encrypted manner. The web interface allows you to create accounts and store online credientials such as emails,usernames and passwords</h2>
+
 
 <br>
 
@@ -38,7 +34,7 @@ Storing digital records has always been a hassle; I do not trust using a passwor
 
 <p> 64-bit CPU architecture is needed to run the mongodb database, therefore this will work on Raspberry Pi models (3/4/400) with 64-bit CPU architecture (arm64v8) and supporting OS such as Ubuntu Server/Desktop<p>
 
-- Models: (3/4) (tested on 3 and 4)
+- Models: (3/4) (tested on model 4)
 - OS: [Ubuntu Server/Desktop](https://ubuntu.com/download/raspberry-pi) (tested)
 - [Docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/) installed
 
