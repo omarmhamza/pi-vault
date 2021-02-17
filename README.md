@@ -22,7 +22,7 @@
 
 # Motivation
 
-Storing digital records has always been a hassle; I do not trust using a password managers or tools such as the built in password manager on google chrome's browser. Because, they are always prone to secuity breaches and vulnerabilities. Therefore, I decided to create my own vault on my Raspberry Pi. This way I can store whatever I like knowing that I am offline and using secure encrypted operations.  
+Storing digital records has always been a hassle; I do not trust using a password managers or tools such as the built in password manager on google chrome's browser because, they are always prone to secuity breaches and vulnerabilities. Therefore, I decided to create my own vault on the Raspberry Pi. This way I can store whatever I like knowing that I am offline and using secure options.  
 
 <br>
 
@@ -154,7 +154,7 @@ How your account and password details will look like:
       }
     ],
     "total_passwords": 3,
-    "username": "omar"
+    "username": "test"
   }
 ]
 
